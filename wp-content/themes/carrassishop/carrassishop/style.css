@@ -168,7 +168,7 @@ header:before {
 }
 
 .attract h1 {
-	font-size: 2.3rem;
+	font-size: 1.7rem;
 	text-align:center;
 }
 
@@ -208,7 +208,7 @@ header:before {
 }
 
 .attract img{
-	width:75%;
+	width:80%;
 	max-height: 400px;
 
 	position: relative;
@@ -217,7 +217,7 @@ header:before {
 
 .text_emphasis{
 	color: #dd9a00;
-s}
+}
 
 
 
@@ -237,6 +237,11 @@ s}
 	box-shadow: 0px 0px 24px 9px #00000091;
 	padding-top :0px;
 	padding-bottom: 0px;
+}
+
+.plugin_title h5 {
+	font-family: 'Martel', sans-serif !important;
+
 }
 
 
@@ -287,7 +292,7 @@ s}
 }
 
 .product_highlight .plugin_logo img{
-	height:90px;
+	height:75px;
 }
 
 .product_highlight .plugin_description{
@@ -305,7 +310,7 @@ s}
 
 .product_highlight .plugin_screenshot {
 	margin: 0px 0px 15px 0px;
-	flex: 4 !important;
+	flex: 2 !important;
 	overflow:hidden;
 	border-radius:10px;
 	position:relative;
@@ -360,6 +365,25 @@ section.about .about_text{
 	/*margin:0px 105px;*/
 }
 
+.about .usp h4 {
+	font-family: 'Martel', sans-serif !important;
+	color: #dd9a00;
+	margin-bottom: 10px;
+
+
+}
+
+.usp img {
+	height:75px;
+	margin-bottom: 10px;
+}
+
+.usp p {
+	font-size:14px;
+	margin-bottom: 10px;
+
+}
+
 section.about:before {
 	content: ' ';
 	display: block;
@@ -370,7 +394,7 @@ section.about:before {
 	bottom:0;
 	background-image: url(http://carrassi/wp-content/uploads/2021/10/cubes.png);
 	background-repeat: repeat;
-	opacity: 0.8;
+	opacity: 0.5;
 	-webkit-mask-image: linear-gradient(360deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 68%);
 	pointer-events: none;
 }
@@ -542,7 +566,7 @@ footer:before {
 }
 
 section.about .about_text {
-    margin: 0px 105px;
+    margin: 0px 0px;
 }
 }
 

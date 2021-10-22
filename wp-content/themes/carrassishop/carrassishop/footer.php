@@ -15,7 +15,9 @@
 		<div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <img width="225" src="http://carrassi/wp-content/uploads/2021/10/logo_white.svg"/>
+                    <a class="navbar-brand" href="/">
+                        <img width="225" src="http://carrassi/wp-content/uploads/2021/10/logo_white.svg"/>
+                    </a>
                     <p class="cpr" >
                         © 2021 Carassi software - all rights reserved
 

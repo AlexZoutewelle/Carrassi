@@ -142,21 +142,22 @@ get_header();
 
                     <div class="col-sm-12 col-md-4 usp">
                         <div class="container pt-5">
-                            <img src="https://img.icons8.com/ios-filled/50/ffffff/money--v1.png"/>
+                            <img src="http://carrassi/wp-content/uploads/2021/10/CheckBoard-1.svg"/>
                             <h4>Value policy</h4>
                             <p>Creating value is our number one priority. If our plugins fail to deliver what they promise, you get your money back.</p>
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-4 usp">
                         <div class="container pt-5">
-                            <img src="https://img.icons8.com/external-vitaliy-gorbachev-fill-vitaly-gorbachev/60/ffffff/external-support-online-shopping-vitaliy-gorbachev-fill-vitaly-gorbachev-2.png"/>
+                            <img src="http://carrassi/wp-content/uploads/2021/10/supporticon.svg"/>
                             <h4>Support</h4>
                             <p>We offer 24/7 personal support. Have a question or an issue with one of our plugins? We are always available to help you.</p>
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-4 usp">
                         <div class="container pt-5">
-                            <img src="https://img.icons8.com/glyph-neue/64/ffffff/approve-and-update.png"/>                            <h4>Regular updates</h4>
+                            <img src="http://carrassi/wp-content/uploads/2021/10/gearsicon.svg"/>
+                            <h4>Regular updates</h4>
                             <p>The web is constantly developing, so we make it our mission to adapt. Our plugins will always be up-to-date.</p>
                         </div>
                     </div>

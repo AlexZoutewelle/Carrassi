@@ -11,14 +11,11 @@ get_header();
 ?>
 
 	<main id="primary" class="site-main">
-
-        <h1>JA HALLOOOOOEEEUUUWW </h1>
 		<?php
 		while ( have_posts() ) :
 			the_post();
 
 			get_template_part( 'template-parts/content', get_post_type() );
-
 
 
 			// If comments are open or we have at least one comment, load up the comment template.

@@ -151,11 +151,6 @@ function carrassishop_scripts() {
 add_action( 'wp_enqueue_scripts', 'carrassishop_scripts' );
 
 /**
- * Implement the Custom Header feature.
- */
-require get_template_directory() . '/inc/custom-header.php';
-
-/**
  * Custom template tags for this theme.
  */
 require get_template_directory() . '/inc/template-tags.php';
@@ -214,8 +209,10 @@ function enqueue_general_scripts() {
 
     wp_enqueue_style( 'wpb-google-fonts', 'https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@300;600&family=Martel:wght@200;700&family=Mulish:wght@200;400&display=swap', false );
 
-    wp_enqueue_Script('carrassi-js', get_template_directory_uri() . '/js/carrassi.js', array('jquery'));
+    wp_enqueue_script('carrassi-js', get_template_directory_uri() . '/js/carrassi.js', array('jquery'));
     wp_localize_script('carrassi-js', 'carrassi_config', array('ajax_url' => admin_url( 'admin-ajax.php' )));
+
+    wp_enqueue_style( 'load-fa', 'https://use.fontawesome.com/releases/v5.5.0/css/all.css' );
 
 
 }

@@ -23,7 +23,10 @@ get_header();
 				comments_template();
 			endif;
 
-		endwhile; // End of the loop.
+            carrassishop_render_similar_posts();
+
+
+        endwhile; // End of the loop.
 		?>
 
 	</main><!-- #main -->

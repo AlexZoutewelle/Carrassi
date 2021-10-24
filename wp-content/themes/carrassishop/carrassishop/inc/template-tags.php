@@ -76,9 +76,9 @@ if ( ! function_exists('carrassishop_share_this_post')) :
             <div class="col-6">
                 <h4>Share this post</h4>
             </div>
-            <div class="col-6 d-flex justify-content-end">
-                <i class="fab fa-linkedin fa-2x"></i>
+            <div class="col-6 d-flex justify-content-end socal_sharing">
                 <i class="fab fa-twitter fa-2x"></i>
+                <i class="fab fa-linkedin fa-2x"></i>
                 <i class="fab fa-facebook fa-2x"></i>
             </div>
         </div>
@@ -185,33 +185,104 @@ if ( ! function_exists( 'wp_body_open' ) ) :
 	}
 endif;
 
+
+
+if ( ! function_exists ('carrassishop_render_journal_highlight')) {
+    function carrassishop_render_journal_highlight($entry, $single_col = false) { ?>
+                                <div class="<?php echo $single_col ? "col-12" : "col-sm-12 col-md-6"; ?> ">
+                                    <div class="journal_wrap">
+                                        <span class="featured_tag">
+                                        <?php echo esc_html(get_field('featured_tag', $entry->ID)); ?>
+                                    </span>
+                                        <div class="col-12 h-50 article_top" style="background: url(<?php echo get_the_post_thumbnail_url($entry->ID); ?>); background-size: cover;">
+                                            <div class="article_title">
+                                        <span>
+                                            <h4>
+                                                <?php echo $entry->post_title; ?>
+                                            </h4>
+                                        </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 h-50 article_bot">
+                                            <div class="article_excerpt">
+                                                <?php echo get_the_excerpt($entry->ID); ?>
+                                            </div>
+                                            <div class="article_readon">
+                                                <a href="<?php echo get_permalink($entry->ID); ?>">
+                                                    Read on
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                        </div>
+    <?php }
+}
+
 if( ! function_exists('carrassishop_comment_callback')) {
     function carrassishop_comment_callback($comment, $args, $depth) {
-        $author_avatar = get_avatar_url($comment->comment_ID, array('size' => 450));
         ?>
-            <li class="comment <?php echo $depth % 2 == 0 ? 'even' : 'uneven'; ?>">
-                <div class="row p-2">
-                    <div class="col-1">
+            <li class="comment <?php echo $depth % 2 == 0 ? 'even' : 'uneven'; ?> <?php echo $depth == 1 ? "root": ""; ?>">
+
+                <?php
+                    $userdata = get_userdata($comment->user_id);
+                    $author_name = $userdata != false ? $userdata->display_name : $comment->comment_author;
+                    $author_avatar = get_avatar_url($comment->comment_ID, array('size' => 450));
+                ?>
+
+                <div id="<?php echo $comment->comment_ID; ?>" class="row g-0 p-3 mb-3 comment-main-wrap">
+                    <div class="col-2">
                         <img src="<?php echo esc_url($author_avatar); ?>" />
                     </div>
-                    <div class="col-11">
+                    <div class="col-10 px-3 comment-content-wrap">
                         <div class="comment-author-meta mb-1">
-                            <strong><?php echo esc_html($comment->comment_author, 'carrassishop'); ?></strong> • <?php echo date("M d Y h:i a", strtotime($comment->comment_date))?>
+                            <strong><?php echo esc_html($author_name, 'carrassishop'); ?></strong> • <?php echo date("M d Y h:i a", strtotime($comment->comment_date))?>
                         </div>
-                        <div class="comment-content">
+                        <div class="comment-content py-2">
                             <?php echo esc_html($comment->comment_content); ?>
                         </div>
-                    </div>
-                    <div class="col-12 reply"><?php
-                        // Display comment reply link
-                        comment_reply_link( array_merge( $args, array(
-                            'add_below' => 'div-comment',
-                            'depth'     => $depth,
-                            'max_depth' => $args['max_depth']
-                        ) ) ); ?>
+                        <div class="col-12 reply">
+
+
+                            <?php
+                            // Display comment reply link
+
+                            comment_reply_link( array_merge( $args, array(
+                                'add_below' => 'div-comment',
+                                'depth'     => $depth,
+                                'max_depth' => $args['max_depth'],
+                                'reply_text' =>'<i class="fa fa-reply" aria-hidden="true"></i> ' . __('Reply', 'carrassishop'),
+
+                            ) ) ); ?>
+                        </div>
                     </div>
                 </div>
+
         <?php
 
+    }
+}
+
+if( ! function_exists( 'carrassishop_render_similar_posts')) {
+    function carrassishop_render_similar_posts() {
+        $similar_posts = get_posts(array('tags' => get_the_tags(), 'exclude' => get_the_ID()));
+        $the_posts = array_slice($similar_posts, -3);
+
+        ?>
+           <section class="related_posts" id="related_posts">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 mb-2">
+                        <h2>
+                            <?php _e("Related posts", 'carrassishop'); ?>
+                        </h2>
+                    </div>
+                    <?php foreach($the_posts as $post) {
+                        carrassishop_render_journal_highlight($post);
+                    } ?>
+                </div>
+            </div>
+           </section>
+        <?php
     }
 }

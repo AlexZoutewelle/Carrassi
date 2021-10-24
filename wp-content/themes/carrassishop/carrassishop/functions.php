@@ -252,6 +252,45 @@ function contact_form_mail() {
     }
 }
 
+add_action('wp_ajax_carrassi_post_comment', 'carrassi_post_comment');
+add_action('wp_ajax_nopriv_carrassi_post_comment', 'carrassi_post_comment');
+function carrassi_post_comment() {
+    $comment = wp_handle_comment_submission( $_REQUEST['form'] );
+    if ( is_wp_error( $comment ) ) {
+        $error_data = intval( $comment->get_error_data() );
+        if ( ! empty( $error_data ) ) {
+            wp_send_json_error(array('message' => $comment->get_error_message()));
+        } else {
+            wp_send_json_error(array('message' => __('Something went wrong. Want to try again?', 'carrassishop')));
+        }
+    }
+
+    /*
+     * Set Cookies
+     */
+    $user = wp_get_current_user();
+    do_action('set_comment_cookies', $comment, $user);
+
+    ob_start();
+
+    carrassishop_comment_callback($comment, array(), $_REQUEST['even'] === 'true' ? 2 : 1);
+//    wp_list_comments(
+//        array(
+//            'style'      => 'li',
+//            'short_ping' => true,
+//            'callback' => 'carrassishop_comment_callback'
+//        ), get_comments(
+//            array('post_id' => $_REQUEST['form']['comment_post_ID'] )
+//        )
+//    );
+
+
+    $comments_html = ob_get_clean();
+
+
+    wp_send_json_success(array('message' => '', 'comments_html' => $comments_html));
+    die();
+}
 
 
 

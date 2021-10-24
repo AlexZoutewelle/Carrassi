@@ -13,8 +13,13 @@
     <div class="container my-3 article_main">
         <div class="row">
             <header class="entry-header px-0 mb-5">
+                    <span class="featured_tag">
+                        <?php echo esc_html(get_field('featured_tag', get_the_ID())); ?>
+                    </span>
                 <div class="article_header col-12 mb-2" style="background:url(<?php echo esc_url(get_the_post_thumbnail_url()); ?>);">
                     <div class="article_title px-4 py-2">
+
+
                     <span>
                         <?php  the_title( '<h1 class="entry-title">', '</h1>' ); ?>
                     </span>
@@ -38,7 +43,7 @@
             <?php ; ?>
         </div>
 
-        <div class="row ">
+        <div class="row mb-5">
             <div class="entry-content">
                 <?php
                 the_content(

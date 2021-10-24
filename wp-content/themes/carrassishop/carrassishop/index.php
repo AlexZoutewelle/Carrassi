@@ -36,6 +36,8 @@ get_header();
                             </button>
                         </a>
 
+                        <?php get_posts() ?>
+
                     </div>
 
                 </div>
@@ -43,83 +45,100 @@ get_header();
         </section>
 
         <section class="product_highlight" id="plugins">
-            <div class="container">
-                <div class="row text-center section_title py-5">
-                    <h1>
-                        Our latest plugins
-                    </h1>
-                </div>
-                <div class="row justify-content-center">
+            <div class="row g-0 text-center section_title py-5">
+                <h1>
+                    Our latest plugins
+                </h1>
+            </div>
+            <div class="row g-0 justify-content-center">
 
                     <?php
-                        $plugins = wc_get_products(
-                            array(
-                                'category' => array('plugin'),
-                                'limit' => '3'
-                            )
-                        );
+                    $plugins = wc_get_products(
+                        array(
+                            'category' => array('plugin'),
+                            'limit' => '3'
+                        )
+                    );
 
-                        foreach($plugins as $plugin): ?>
-                            <div class="col-sm-12 col-md-6 col-lg-4 plugin_wrap p-3">
-                                <div class="plugin">
-                                    <div class="container d-flex flex-column plugin_content">
-                                        <div class="plugin_logo">
-                                            <img src="<?php echo get_field('plugin_icon', $plugin->get_id())['url']; ?>"/>
-                                        </div>
+                    foreach($plugins as $plugin): ?>
+                        <div class="col-sm-12 col-md-6 col-lg-4 plugin_wrap">
+                            <div class="plugin">
+                                <div class="container d-flex flex-column plugin_content">
+                                    <div class="plugin_logo">
+                                        <img src="<?php echo get_field('plugin_icon', $plugin->get_id())['url']; ?>"/>
+                                    </div>
 
-                                        <div class="plugin_title">
-                                            <h5><strong><?php echo $plugin->get_title(); ?></strong></h5>
-                                        </div>
+                                    <div class="plugin_title">
+                                        <h2 class="mb-4" ><strong><?php echo $plugin->get_title(); ?></strong></h2>
+                                        <p>  <?php echo $plugin->get_short_description(); ?> </p>
+                                    </div>
 
-                                        <div class="plugin_screenshot">
-                                            <img src="<?php echo get_field('plugin_illustration', $plugin->get_id())['url']; ?>"/>
-                                        </div>
+                                    <div class="plugin_button">
+                                        <button type="button" class="btn btn-yellow" onclick="location.href='<?php echo $plugin->get_permalink(); ?>'" >
+                                            View details
+                                        </button>
+                                    </div>
 
-                                        <div class="plugin_description">
-                                            <?php echo $plugin->get_short_description(); ?>
-                                        </div>
-
-                                        <div class="plugin_button">
-                                            <button type="button" class="btn btn-yellow" onclick="location.href='<?php echo $plugin->get_permalink(); ?>'" >
-                                                View details
-                                            </button>
-                                        </div>
+                                    <div class="plugin_screenshot" style="background:url(<?php echo get_field('plugin_illustration', $plugin->get_id())['url']; ?>)">
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="col-sm-12 col-md-6 col-lg-4 plugin_wrap p-3">
-                                <div class="plugin">
-                                    <div class="container d-flex flex-column plugin_content">
-                                        <div class="plugin_logo">
-                                            <img src="<?php echo get_field('plugin_icon', $plugin->get_id())['url']; ?>"/>
-                                        </div>
 
-                                        <div class="plugin_title">
-                                            <h5><strong><?php echo $plugin->get_title(); ?></strong></h5>
-                                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4 plugin_wrap">
+                            <div class="plugin">
+                                <div class="container d-flex flex-column plugin_content">
+                                    <div class="plugin_logo">
+                                        <img src="<?php echo get_field('plugin_icon', $plugin->get_id())['url']; ?>"/>
+                                    </div>
 
-                                        <div class="plugin_screenshot">
-                                            <img src="<?php echo get_field('plugin_illustration', $plugin->get_id())['url']; ?>"/>
-                                        </div>
+                                    <div class="plugin_title">
+                                        <h2 class="mb-4" ><strong><?php echo $plugin->get_title(); ?></strong></h2>
+                                        <p>  <?php echo $plugin->get_short_description(); ?> </p>
+                                    </div>
 
-                                        <div class="plugin_description">
-                                            <?php echo $plugin->get_short_description(); ?>
-                                        </div>
+                                    <div class="plugin_button">
+                                        <button type="button" class="btn btn-yellow" onclick="location.href='<?php echo $plugin->get_permalink(); ?>'" >
+                                            View details
+                                        </button>
+                                    </div>
 
-                                        <div class="plugin_button">
-                                            <button type="button" class="btn btn-yellow" onclick="location.href='<?php echo $plugin->get_permalink(); ?>'" >
-                                                View details
-                                            </button>
-                                        </div>
+                                    <div class="plugin_screenshot" style="background:url(<?php echo get_field('plugin_illustration', $plugin->get_id())['url']; ?>)">
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+
+                        <div class="col-sm-12 col-md-6 col-lg-4 plugin_wrap">
+                            <div class="plugin">
+                                <div class="container d-flex flex-column plugin_content">
+                                    <div class="plugin_logo">
+                                        <img src="<?php echo get_field('plugin_icon', $plugin->get_id())['url']; ?>"/>
+                                    </div>
+
+                                    <div class="plugin_title">
+                                        <h2 class="mb-4" ><strong><?php echo $plugin->get_title(); ?></strong></h2>
+                                        <p>  <?php echo $plugin->get_short_description(); ?> </p>
+                                    </div>
+
+                                    <div class="plugin_button">
+                                        <button type="button" class="btn btn-yellow" onclick="location.href='<?php echo $plugin->get_permalink(); ?>'" >
+                                            View details
+                                        </button>
+                                    </div>
+
+                                    <div class="plugin_screenshot" style="background:url(<?php echo get_field('plugin_illustration', $plugin->get_id())['url']; ?>)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     <?php endforeach; ?>
 
                 </div>
-            </div>
+
         </section>
 
         <section class="about" id="about">
@@ -171,7 +190,7 @@ get_header();
 
         <section class="journal_highlight" id="journal">
             <div class="container">
-                <div class="row text-center section_title">
+                <div class="text-center section_title">
                     <h1>
                         Latest journal entries
                     </h1>
@@ -182,30 +201,7 @@ get_header();
 
 
                     <?php foreach($journal_entries as $entry): ?>
-
-                    <?php $test = 1; ?>
-
-                        <div class="col-sm-12 col-md-6 journal_wrap">
-                                <div class="col-12 h-50 article_top" style="background: url(<?php echo get_the_post_thumbnail_url(); ?>); background-size: cover;">
-                                    <div class="article_title">
-                                        <span>
-                                            <h4>
-                                                <?php echo get_the_title(); ?>
-                                            </h4>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="col-12 h-50 article_bot">
-                                    <div class="article_excerpt">
-                                        <?php echo get_the_excerpt() ?>
-                                    </div>
-                                    <div class="article_readon">
-                                        <a href="<?php echo get_the_permalink(); ?>">
-                                            Read on
-                                        </a>
-                                    </div>
-                                </div>
-                        </div>
+                        <?php carrassishop_render_journal_highlight($entry);?>
                     <?php endforeach; ?>
                 </div>
             </div>

@@ -14,6 +14,9 @@
 
 get_header();
 ?>
+    <aside>
+        <button class="btn-toTop"><i class="fas fa-arrow-up"></i></button>
+    </aside>
 
 	<main id="primary" class="site-main">
 

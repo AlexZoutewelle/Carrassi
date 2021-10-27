@@ -272,7 +272,7 @@ if( ! function_exists( 'carrassishop_render_similar_posts')) {
            <section class="related_posts" id="related_posts">
             <div class="container">
                 <div class="row">
-                    <div class="col-12 mb-2">
+                    <div class="col-12 my-5">
                         <h2>
                             <?php _e($headline, 'carrassishop'); ?>
                         </h2>
@@ -284,5 +284,26 @@ if( ! function_exists( 'carrassishop_render_similar_posts')) {
             </div>
            </section>
         <?php
+    }
+}
+
+if ( ! function_exists('carrassishop_render_starrating')) {
+    function carrassishop_render_starrating($rating) {
+        $rating = (int)$rating;
+        $leftover = 5 - $rating;
+
+        /** Render the amount of stars as is rated **/
+        while($rating != 0) {
+            echo "<span class='rating_star'><i class=\"fas fa-star\"></i></span>";
+            $rating -= 1;
+        }
+
+        /** Render the leftover stars **/
+        while($leftover != 0) {
+            echo "<span class='leftover_star'><i class=\"fas fa-star\"></i></span>";
+            $leftover -= 1;
+        }
+
+
     }
 }

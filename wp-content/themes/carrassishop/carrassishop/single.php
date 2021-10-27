@@ -9,8 +9,11 @@
 
 get_header();
 ?>
+    <aside>
+        <button class="btn-toTop"><i class="fas fa-arrow-up"></i></button>
+    </aside>
 
-	<main id="primary" class="site-main">
+	<main id="primary" class="site-main main-<?php echo get_post_type(); ?>">
 		<?php
 		while ( have_posts() ) :
 			the_post();

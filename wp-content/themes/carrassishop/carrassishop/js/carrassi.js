@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function(e){
         }
     })
 
-    jQuery('#commentform').submit(function(e){
+    jQuery('.main-post #commentform').submit(function(e){
         e.preventDefault();
         let parent_comment = e.target.closest('.comment');
         let form_data = {};
@@ -150,7 +150,6 @@ document.addEventListener('DOMContentLoaded', function(e){
                 // }
             }
         });
-
     })
 
     jQuery(".journal_wrap").click(function(e) {

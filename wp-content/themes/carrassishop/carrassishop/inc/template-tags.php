@@ -189,7 +189,7 @@ endif;
 
 if ( ! function_exists ('carrassishop_render_journal_highlight')) {
     function carrassishop_render_journal_highlight($entry, $single_col = false) { ?>
-                                <div class="<?php echo $single_col ? "col-12" : "col-sm-12 col-md-6"; ?> ">
+                                <article class="<?php echo $single_col ? "col-12" : "col-sm-12 col-md-6"; ?> ">
                                     <div class="journal_wrap">
                                         <span class="featured_tag">
                                         <?php echo esc_html(get_field('featured_tag', $entry->ID)); ?>
@@ -215,7 +215,7 @@ if ( ! function_exists ('carrassishop_render_journal_highlight')) {
                                         </div>
                                     </div>
 
-                        </div>
+                        </article>
     <?php }
 }
 
@@ -231,14 +231,14 @@ if( ! function_exists('carrassishop_comment_callback')) {
                 ?>
 
                 <div id="<?php echo $comment->comment_ID; ?>" class="row g-0 p-3 mb-3 comment-main-wrap">
-                    <div class="col-2">
+                    <div class="col-1">
                         <img src="<?php echo esc_url($author_avatar); ?>" />
                     </div>
-                    <div class="col-10 px-3 comment-content-wrap">
+                    <div class="col-11 px-3 comment-content-wrap">
                         <div class="comment-author-meta mb-1">
                             <strong><?php echo esc_html($author_name, 'carrassishop'); ?></strong> • <?php echo date("M d Y h:i a", strtotime($comment->comment_date))?>
                         </div>
-                        <div class="comment-content py-2">
+                        <div class="comment-content py-1">
                             <?php echo esc_html($comment->comment_content); ?>
                         </div>
                         <div class="col-12 reply">
@@ -264,8 +264,8 @@ if( ! function_exists('carrassishop_comment_callback')) {
 }
 
 if( ! function_exists( 'carrassishop_render_similar_posts')) {
-    function carrassishop_render_similar_posts() {
-        $similar_posts = get_posts(array('tags' => get_the_tags(), 'exclude' => get_the_ID()));
+    function carrassishop_render_similar_posts($headline = "Related posts") {
+        $similar_posts = get_posts(array('tags' => get_the_tags(), 'category' => 'Journal', 'exclude' => get_the_ID()));
         $the_posts = array_slice($similar_posts, -3);
 
         ?>
@@ -274,7 +274,7 @@ if( ! function_exists( 'carrassishop_render_similar_posts')) {
                 <div class="row">
                     <div class="col-12 mb-2">
                         <h2>
-                            <?php _e("Related posts", 'carrassishop'); ?>
+                            <?php _e($headline, 'carrassishop'); ?>
                         </h2>
                     </div>
                     <?php foreach($the_posts as $post) {

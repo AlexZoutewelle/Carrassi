@@ -161,5 +161,32 @@ document.addEventListener('DOMContentLoaded', function(e){
         e.target.closest(".plugin").querySelector("button").click();
     })
 
+    let usps = jQuery('#key_features .usp');
+    for(var i = 0; i < usps.length; i++) {
+        console.log(usps[i]);
+    }
+
+    let btn_toTop = jQuery('.btn-toTop');
+    if(btn_toTop.length) {
+
+        window.onscroll = function() {update_toTopButton()};
+
+        function update_toTopButton() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn_toTop.addClass("active");
+            } else {
+                btn_toTop.removeClass("active");
+            }
+        }
+
+        btn_toTop.on('click', function(e) {
+            jQuery('html, body').stop().animate({
+                scrollTop: '0px'
+            }, 500)
+        });
+
+
+    }
+
 });
 

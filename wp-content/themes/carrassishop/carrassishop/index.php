@@ -79,7 +79,7 @@ get_header();
                                         </button>
                                     </div>
 
-                                    <div class="plugin_screenshot" style="background:url(<?php echo get_field('plugin_illustration', $plugin->get_id())['url']; ?>)">
+                                    <div class="plugin_illustration" style="background:url(<?php echo get_field('plugin_illustration', $plugin->get_id())['url']; ?>)">
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +104,7 @@ get_header();
                                         </button>
                                     </div>
 
-                                    <div class="plugin_screenshot" style="background:url(<?php echo get_field('plugin_illustration', $plugin->get_id())['url']; ?>)">
+                                    <div class="plugin_illustration" style="background:url(<?php echo get_field('plugin_illustration', $plugin->get_id())['url']; ?>)">
                                     </div>
                                 </div>
                             </div>
@@ -129,7 +129,7 @@ get_header();
                                         </button>
                                     </div>
 
-                                    <div class="plugin_screenshot" style="background:url(<?php echo get_field('plugin_illustration', $plugin->get_id())['url']; ?>)">
+                                    <div class="plugin_illustration" style="background:url(<?php echo get_field('plugin_illustration', $plugin->get_id())['url']; ?>)">
                                     </div>
                                 </div>
                             </div>
@@ -190,7 +190,7 @@ get_header();
 
         <section class="journal_highlight" id="journal">
             <div class="container">
-                <div class="text-center section_title">
+                <div class="text-center section_title p-3">
                     <h1>
                         Latest journal entries
                     </h1>

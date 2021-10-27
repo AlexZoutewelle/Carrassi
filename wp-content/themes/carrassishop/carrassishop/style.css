@@ -194,7 +194,7 @@ h5 {
 	bottom:0;
 	background-image: url(http://carrassi/wp-content/uploads/2021/10/cubes.png);
 	background-repeat: repeat;
-	opacity:0.3;
+	opacity: 0.6;
 	-webkit-mask-image: linear-gradient(
 			-160deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.15) 75%, rgba(0,0,0,0.15) 100%, rgba(0,0,0,0) 100%);
 	animation: texture_cycle 40s infinite;
@@ -234,13 +234,48 @@ h5 {
 	padding:10px;
 }
 
-.site-main .btn-yellow {
+.btn-yellow {
 	background-color: #dd9a00 !important;
 	color: #D9D9D9;
 	border: none;
 	border-radius: 20px;
 	min-width: 95px;
 	min-height: 55px;
+	transition:background-color 0.2s;
+}
+
+.btn-blue {
+	background-color: #0a58ca !important;
+	color: #D9D9D9;
+	border: none;
+	border-radius: 11px;
+	min-width: 95px;
+	min-height: 55px;
+	padding: 0px 15px;
+	transition:background-color 0.2s;
+}
+
+.btn-purple {
+	background-color: #5e1288 !important;
+	color: #D9D9D9;
+	border: none;
+	border-radius: 11px;
+	min-width: 95px;
+	min-height: 55px;
+	padding: 0px 15px;
+	transition:background-color 0.2s;
+}
+
+button.btn-yellow:hover {
+	background-color: #936805 !important;
+}
+
+button.btn-blue:hover {
+	background-color: #0a449a !important;
+}
+
+button.btn-purple:hover {
+	background-color: #4e1070 !important;
 }
 
 .attract-button {
@@ -307,7 +342,7 @@ h5 {
 
 .product_highlight .plugin_content {
 	position:relative;
-	box-shadow: inset 0px 3px 49px #000000;
+	box-shadow: inset -7px 0px 49px #000000;
 	color:#D9D9D9;
 	height:82vh;
 	padding: 0px 5vh;
@@ -372,22 +407,9 @@ h5 {
 	/*margin:15px;*/
 }
 
-.product_highlight .plugin_screenshot {
+.product_highlight .plugin_illustration {z-index:1 !important;position: absolute;left: 0;bottom: 0;width: 100%;height: 60%;overflow: hidden;background-size: 100% 100% !important;opacity: 0.2;filter: drop-shadow(2px 4px 6px black);}
 
-	z-index:1 !important;
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	height: 60%;
-	overflow: hidden;
-	background-size: 100% 100% !important;
-	opacity: 0.2;
-	filter: drop-shadow(2px 4px 6px black) blur(1px);
-
-}
-
-.product_highlight .plugin_screenshot:after {
+.product_highlight .plugin_illustration:after {
     /*content: ' ';*/
 	/*display: block;*/
 	/*position: absolute;*/
@@ -401,7 +423,7 @@ h5 {
 	/*pointer-events: none;*/
 }
 
-.product_highlight .plugin_screenshot img {
+.product_highlight .plugin_illustration img {
 	width: 100%;
 	border-radius: 10px;
 	opacity: 0.1;
@@ -437,12 +459,10 @@ section.about .about_text{
 	/*margin:0px 105px;*/
 }
 
-.about .usp h4 {
+.usp h4,h5 {
 	font-family: 'Martel', sans-serif !important;
 	color: #dd9a00;
 	margin-bottom: 10px;
-
-
 }
 
 .usp img {
@@ -460,7 +480,6 @@ section.about .about_text{
 .usp p {
 	font-size:14px;
 	margin-bottom: 10px;
-
 }
 
 section.about:before {
@@ -624,6 +643,12 @@ section.contact_form:before{
 	color:#dd9a00;
 }
 
+.comments-area {
+	background-color: #1d191f;
+	color:#D9D9D9;
+	margin-bottom:0px !important;
+}
+
 ol.comment-list {
 	padding-left: 0px !important;
 	list-style: none;
@@ -645,15 +670,17 @@ ol.comment-list {
 
 }
 
+.comment-content {
+	font-size:14px;
+}
+
 .comment.uneven {
 
 }
 .comment-main-wrap {
-	background: linear-gradient( 360deg, #1d191f, #2c3033);
-	color:#D9D9D9;
-	border-radius:5px;
-	position:relative;
-
+	background: #2c2f32;
+	color: #D9D9D9;
+	position: relative;
 }
 
 
@@ -681,7 +708,7 @@ ol.comment-list {
 }
 
 .comment.uneven > .comment-main-wrap{
-	background: linear-gradient( 360deg, #000000, #1d191f);
+	/*background: linear-gradient( 360deg, #000000, #1d191f);*/
 }
 
 .comment-author-meta strong {
@@ -711,10 +738,9 @@ ol.comment-list {
 	padding: 20px 0px;
 }
 
-
 /*//commentform*/
 #commentform {
-	background: linear-gradient( 359deg, #1d191f, #2c3033);
+	background: #2c2f32;
 	padding: 20px;
 	color: white;
 	font-family: 'Martel', sans-serif;
@@ -750,7 +776,7 @@ p.form_submit {
 
 .article_main {
 	box-shadow: 0px 7px 19px 0px black;
-	background: linear-gradient( 0deg, rgb(0 0 0) 0%, rgba(55,60,63,1) 100%);
+	background: linear-gradient( 0deg, rgb(29 25 31) 0%, rgba(55,60,63,1) 100%);
 	color: #DFDFDF;
 }
 
@@ -805,6 +831,217 @@ p.form_submit {
 
 
 
+.plugin_main article {
+	margin-top:2px;
+}
+
+#product_summary {
+	background-color: #1d191f;
+	color: #D9D9D9;
+}
+
+
+.product_logo {
+	height: 115px;
+}
+
+.prod_sum_desc {
+	z-index: 5;
+	position: relative;
+}
+
+.prod_sum_desc .product_logo {
+	height:115px;
+	filter: drop-shadow(2px 4px 6px black);
+}
+
+.prod_sum_desc header {
+	z-index: 4;
+	position: relative;
+}
+
+.prod_sum_desc figure {
+	position: absolute;
+	top: 37px;
+	bottom: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 1;
+	opacity: 0.3;
+	/* position: relative; */
+}
+
+.prod_sum_desc figure img {
+	/* height: 86%; */
+	width: 208px;
+	z-index: 1;
+	position: absolute;
+	filter: drop-shadow(2px 4px 6px black);
+	left: 3%;
+}
+
+.prod_sum_row{
+	opacity: 1;
+	position:relative;
+	background: linear-gradient(
+180deg, rgba(29,25,31,1) 0%, rgba(55,60,63,1) 100%);
+}
+
+.prod_sum_row:before {
+	/* content: ''; */
+	content: ' ';
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background-image: url(http://carrassi/wp-content/uploads/2021/10/gplay.png);
+	background-repeat: repeat;
+	opacity: 0.5;
+	-webkit-mask-image: linear-gradient(
+			180deg, rgb(0 0 0) 0%, rgb(0 0 0 / 9%) 23%);
+	pointer-events: none;
+	transition: opacity 0.5s;
+	filter: drop-shadow(2px 4px 5px white);
+	z-index: 1;
+}
+
+
+
+
+
+.prod_sum_pricetab {
+	background: #242226;
+	display:flex;
+	flex-direction: column;
+	border: 0px solid #7a7a7a;
+	z-index: 10;
+	/* border-radius: 5%; */
+	/* position: fixed; */
+}
+
+#pricetab_illustration{
+	flex: 1.5;
+	background: white;
+	border: 2px solid black;
+}
+
+#pricetab_illustration img{
+	width: 100%;
+	height: 100%;
+}
+
+#pricetab_pricing {
+	flex:1;
+	display: flex;
+	flex-direction: column;
+}
+
+#pricetab_pricing del {
+	color: #dd9a00;
+}
+
+#pricetab_pricing ins {
+	color: #ffffff;
+	font-size: 1.9rem;
+	font-weight: bold;
+}
+
+#pricetab_pricing .form-check {
+	margin: 1rem 0px;
+}
+
+#pricetab_pricing button {
+	width: 50%;
+	font-size: 1.2rem;
+	color: white;
+}
+
+
+#how_it_works {
+	color: #1d191f;
+}
+
+#how_it_works iframe {
+	height: 100%;
+	width: 100%;}
+
+.iframe_resizable {
+	position: relative;
+	height: 600px;
+}
+
+
+#key_features {
+	background-color: #1d191f;
+	color: #D9D9D9;
+}
+
+#key_features .row {
+	display:flex;
+	justify-content:center;
+}
+
+#key_features {
+	position:relative;
+	background: linear-gradient(180deg, rgba(29,25,31,1) 0%, rgba(55,60,63,1) 100%);
+	padding-bottom: 3rem;
+}
+
+#key_features:before {
+	content: ' ';
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	right:0;
+	bottom:0;
+	background-image: url(http://carrassi/wp-content/uploads/2021/10/gplay.png);
+	background-repeat: repeat;
+	opacity: 0.5;
+	-webkit-mask-image: linear-gradient(360deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 68%);
+	pointer-events: none;
+}
+
+.plugin_main .related_posts h2 {
+	text-align: center;
+}
+
+.btn-toTop {
+	background-color: #dd9a00;
+	border-radius: 50%;
+	border: 0px;
+	position: fixed;
+	right: 2%;
+	bottom: 2%;
+	z-index: 11;
+
+	transition: opacity 0.2s ease-out, background-color 0.2s, height 0.2s, width 0.2s;
+	opacity: 0;
+	height: 0;
+	width: 0;
+	overflow: hidden;
+}
+
+.btn-toTop:hover {
+	background-color: #0a58ca !important;
+	color: white;
+}
+
+.btn-toTop.active {
+	opacity: 1;
+	height: 35px;
+	width: 35px;
+}
+
+
+/* MEDIA QUERIES */
+
+
+
+
 @media (min-width: 768px) {
 		#comments .container {
 			/*padding: 0px 20% 0px 0px;*/
@@ -855,9 +1092,11 @@ p.form_submit {
     margin-top: 20px;
 }
 
-.site-main .btn-yellow {
+.btn-yellow {
     border-radius: 0px;
 }
+
+
 
 .navbar-brand img {
     height: 75px;

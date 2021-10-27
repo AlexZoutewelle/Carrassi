@@ -28,7 +28,7 @@ if ( post_password_required() ) {
                 // You can start editing here -- including this comment!
                 if ( have_comments() ) :
                     ?>
-                    <h3 class="comments-title mb-5">
+                    <h3 class="comments-title my-5">
                         <?php
                         $comment_count = get_comments_number();
 

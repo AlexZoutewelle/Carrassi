@@ -44,87 +44,6 @@ document.addEventListener('DOMContentLoaded', function(e){
 
     });
 
-    jQuery('#form_add_to_cart').submit(function(e){
-        e.preventDefault();
-        jQuery(this).find(".spinner").css("display", "inline-block");
-        jQuery(this).find(".fa-shopping-cart").css("display", "none");
-        let form_data = {};
-        jQuery('#form_add_to_cart').serializeArray().map(function(item) {
-            if ( form_data[item.name] ) {
-                if ( typeof(form_data[item.name]) === "string" ) {
-                    form_data[item.name] = [form_data[item.name]];
-                }
-                form_data[item.name].push(item.value);
-            } else {
-                form_data[item.name] = item.value;
-            }
-        });
-
-        let data = {
-            'action' : 'add_to_cart',
-            'form' : form_data
-        }
-
-        jQuery.ajax({
-            url: carrassi_config.ajax_url,
-            type: 'POST',
-            dataType:'json',
-            cache: false,
-            data: data,
-            success: function(response) {
-                alert(response.data.message);
-                jQuery("#form_add_to_cart .spinner").css("display", "none");
-                jQuery("#form_add_to_cart .fa-shopping-cart").css("display", "inline-block");
-
-                jQuery('.cart_nav_item').replaceWith(response.data.cart_html);
-                document.querySelector('.cart_nav_item')
-            },
-            error: function(reponse) {
-                alert(response.data.message);
-                jQuery("#form_add_to_cart .spinner").css("display", "none");
-                jQuery("#form_add_to_cart .fa-shopping-cart").css("display", "inline-block");
-            }
-        });
-    });
-
-    jQuery(".cart_remove_button").click(function(e){
-        console.log("removing");
-        e.preventDefault();
-
-        jQuery(this).find(".spinner").css("display", "inline-block");
-        jQuery(this).find(".fa-times").css("display", "none");
-
-        let product_id = jQuery(this).data('product_id');
-        let variation_id = jQuery(this).data('variation_id');
-
-        let data = {
-            'action' : 'remove_from_cart',
-            'product_id' : product_id,
-            'variation_id' : variation_id
-        }
-
-        jQuery.ajax({
-            url: carrassi_config.ajax_url,
-            type: 'POST',
-            dataType:'json',
-            cache: false,
-            data: data,
-            success: function(response) {
-                setTimeout(function(){e.target.closest('li').remove()}, 2)
-                jQuery(e.target).closest('li').css('opacity', '0');
-                jQuery(e.target).closest('li').css('height', '0px');
-
-                document.querySelector(".cart-contents-count").innerHTML = response.data.cart_count;
-
-            },
-            error: function(reponse) {
-                alert(response.data.message);
-                jQuery(e.target).find('.spinner').css("display", "none");
-                jQuery(e.target).find('.fa-shopping-cart').css("display", "none");
-            }
-        });
-    })
-
     setShareLinks();
 
     function open_social_sharing_window(url) {
@@ -276,27 +195,119 @@ document.addEventListener('DOMContentLoaded', function(e){
 
 
 
-// make it as accordion for smaller screens
-    if (window.innerWidth > 992) {
-        jQuery(".navbar .dropdown").on('mouseover', function(e) {
-            let el_link = jQuery(this).find('a[data-bs-toggle]');
-            if(el_link != null){
-                let nextEl = el_link.next();
-                el_link.addClass('show');
-                nextEl.addClass('show');
+
+
+    jQuery('#form_add_to_cart').submit(function(e){
+        e.preventDefault();
+        jQuery(this).find(".spinner").css("display", "inline-block");
+        jQuery(this).find(".fa-shopping-cart").css("display", "none");
+        let form_data = {};
+        jQuery('#form_add_to_cart').serializeArray().map(function(item) {
+            if ( form_data[item.name] ) {
+                if ( typeof(form_data[item.name]) === "string" ) {
+                    form_data[item.name] = [form_data[item.name]];
+                }
+                form_data[item.name].push(item.value);
+            } else {
+                form_data[item.name] = item.value;
             }
         });
 
-        jQuery(".navbar .dropdown").on('mouseleave', function(e) {
-            let el_link = jQuery(this).find('a[data-bs-toggle]');
+        let data = {
+            'action' : 'add_to_cart',
+            'form' : form_data
+        }
 
-            if(el_link != null){
-                let nextEl = el_link.next();
-                el_link.removeClass('show');
-                nextEl.removeClass('show');
+        jQuery.ajax({
+            url: carrassi_config.ajax_url,
+            type: 'POST',
+            dataType:'json',
+            cache: false,
+            data: data,
+            success: function(response) {
+                alert(response.data.message);
+                jQuery("#form_add_to_cart .spinner").css("display", "none");
+                jQuery("#form_add_to_cart .fa-shopping-cart").css("display", "inline-block");
+
+                jQuery('.cart_nav_item').replaceWith(response.data.cart_html);
+
+                jQuery(".navbar .dropdown").on('mouseover', cart_button_mouseover);
+                jQuery(".navbar .dropdown").on('mouseleave', cart_button_mouseleave);
+                jQuery(".cart_remove_button").click( remove_cart_item);
+
+            },
+            error: function(reponse) {
+                alert(response.data.message);
+                jQuery("#form_add_to_cart .spinner").css("display", "none");
+                jQuery("#form_add_to_cart .fa-shopping-cart").css("display", "inline-block");
             }
+        });
+    });
 
-        })
+    function remove_cart_item(e) {
+
+        console.log("removing");
+        console.log(this);
+        e.preventDefault();
+
+        jQuery(this).find(".spinner").css("display", "inline-block");
+        jQuery(this).find(".fa-times").css("display", "none");
+
+        let product_id = jQuery(this).data('product_id');
+        let variation_id = jQuery(this).data('variation_id');
+
+        let data = {
+            'action' : 'remove_from_cart',
+            'product_id' : product_id,
+            'variation_id' : variation_id
+        }
+
+        jQuery.ajax({
+            url: carrassi_config.ajax_url,
+            type: 'POST',
+            dataType:'json',
+            cache: false,
+            data: data,
+            success: function(response) {
+                setTimeout(function(){e.target.closest('li').remove()}, 2)
+                jQuery(e.target).closest('li').css('opacity', '0');
+                jQuery(e.target).closest('li').css('height', '0px');
+
+                document.querySelector(".cart-contents-count").innerHTML = response.data.cart_count;
+
+            },
+            error: function(reponse) {
+                alert(response.data.message);
+                jQuery(e.target).find('.spinner').css("display", "none");
+                jQuery(e.target).find('.fa-shopping-cart').css("display", "none");
+            }
+        });
+    }
+    jQuery(".cart_remove_button").click( remove_cart_item);
+
+    function cart_button_mouseover(e) {
+        let el_link = jQuery(this).find('a[data-bs-toggle]');
+        if(el_link != null){
+            let nextEl = el_link.next();
+            el_link.addClass('show');
+            nextEl.addClass('show');
+        }
+    }
+
+    function cart_button_mouseleave(e) {
+        let el_link = jQuery(this).find('a[data-bs-toggle]');
+
+        if(el_link != null){
+            let nextEl = el_link.next();
+            el_link.removeClass('show');
+            nextEl.removeClass('show');
+        }
+    }
+// make it as accordion for smaller screens
+    if (window.innerWidth > 992) {
+        jQuery(".navbar .dropdown").on('mouseover', cart_button_mouseover);
+
+        jQuery(".navbar .dropdown").on('mouseleave', cart_button_mouseleave);
     }
 });
 

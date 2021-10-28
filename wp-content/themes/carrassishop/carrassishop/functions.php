@@ -304,7 +304,7 @@ function woo_cart_button() {
     $cart_url = wc_get_cart_url();  // Set Cart URL
 
     ?>
-    <li class="nav-item dropdown mt-1">
+    <li class="nav-item dropdown mt-1 cart_nav_item">
         <a class="carrassi_cart dropdown-toggle" data-bs-toggle="dropdown" href="<?php echo $cart_url; ?>" title="<?php _e('Your cart', 'carrassishop'); ?>">
             <i class="fas fa-shopping-cart"></i>
             <?php
@@ -322,9 +322,10 @@ function woo_cart_button() {
                 <?php $product = wc_get_product($cart_item['product_id']); ?>
                 <li>
                     <div class="dropdown-item" >
-                        <div class="cart_remove_button" data-product_id="<?php echo $cart_item['product_id']; ?>">
+                        <div class="cart_remove_button" data-product_id="<?php echo $cart_item['product_id']; ?>" data-variation_id="<?php echo $cart_item['variation_id']; ?>">
                             <i class="fas fa-times"></i>
-                            <div class="spinner-border text-light spinner" role="status" style="display:none;"> </div>
+                            <div class="spinner-border
+                            text-light spinner" role="status" style="display:none;"> </div>
                         </div>
                         <div class="cart_product_icon">
                             <img width="50" height="50" src="<?php echo get_field('plugin_icon', $product->get_id())['url']; ?>"/>
@@ -362,12 +363,31 @@ function add_to_cart() {
     $cart = WC()->cart;
     $product_id = (int)$_REQUEST['form']['id'];
     $product_var_id = (int)$_REQUEST['form']['pricePlan'];
-    $product_cart_id = $cart->generate_cart_id($product_var_id);
+    $product_cart_id = $cart->generate_cart_id($product_var_id, $product_var_id);
 
     if(!$cart->find_product_in_cart($product_cart_id)) {
-        $cart->add_to_cart($product_id);
+        $cart->add_to_cart($product_id, 1, $product_var_id);
 
     }
 
-    wp_send_json_success(array('message' => 'success'));
+    ob_start();
+    echo do_shortcode('[woo_cart_button]');
+    $cart_html = ob_get_clean();
+
+    wp_send_json_success(array('message' => 'success', 'cart_html' => $cart_html));
+}
+
+add_action('wp_ajax_remove_from_cart', 'remove_from_cart');
+add_action('wp_ajax_nopriv_remove_from_cart', 'remove_from_cart');
+function remove_from_cart() {
+    $cart = WC()->cart;
+
+    foreach ( $cart->get_cart() as $item_key => $item ) {
+        if ( $item['variation_id'] == (int)$_REQUEST['variation_id'] ) {
+            $cart->remove_cart_item( $item_key );
+            break;
+        }
+    }
+
+    wp_send_json_success(array('cart_count' => $cart->get_cart_contents_count()));
 }

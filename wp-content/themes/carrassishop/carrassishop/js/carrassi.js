@@ -75,6 +75,9 @@ document.addEventListener('DOMContentLoaded', function(e){
                 alert(response.data.message);
                 jQuery("#form_add_to_cart .spinner").css("display", "none");
                 jQuery("#form_add_to_cart .fa-shopping-cart").css("display", "inline-block");
+
+                jQuery('.cart_nav_item').replaceWith(response.data.cart_html);
+                document.querySelector('.cart_nav_item')
             },
             error: function(reponse) {
                 alert(response.data.message);
@@ -88,36 +91,38 @@ document.addEventListener('DOMContentLoaded', function(e){
         console.log("removing");
         e.preventDefault();
 
-        jQuery(e.target).closest('li').css('opacity', '0');
-        jQuery(e.target).closest('li').css('height', '0px');
-        //
-        // console.log(e.target);
-        // jQuery(this).find(".spinner").css("display", "inline-block");
-        // jQuery(this).find(".fa-times").css("display", "none");
-        //
-        // let product_id = jQuery(this).data('product_id');
-        // let data = {
-        //     'action' : 'remove_from_cart',
-        //     'product_id' : product_id
-        // }
-        //
-        // jQuery.ajax({
-        //     url: carrassi_config.ajax_url,
-        //     type: 'POST',
-        //     dataType:'json',
-        //     cache: false,
-        //     data: data,
-        //     success: function(response) {
-        // jQuery(e.target).closest('li').css('opacity', '0');
-        // jQuery(e.target).closest('li').css('opacity', '0px');
-        //
-        //     },
-        //     error: function(reponse) {
-        //         alert(response.data.message);
-        //         jQuery(e.target).find('.spinner').css("display", "none");
-        //         jQuery(e.target).find('.fa-shopping-cart').css("display", "none");
-        //     }
-        // });
+        jQuery(this).find(".spinner").css("display", "inline-block");
+        jQuery(this).find(".fa-times").css("display", "none");
+
+        let product_id = jQuery(this).data('product_id');
+        let variation_id = jQuery(this).data('variation_id');
+
+        let data = {
+            'action' : 'remove_from_cart',
+            'product_id' : product_id,
+            'variation_id' : variation_id
+        }
+
+        jQuery.ajax({
+            url: carrassi_config.ajax_url,
+            type: 'POST',
+            dataType:'json',
+            cache: false,
+            data: data,
+            success: function(response) {
+                setTimeout(function(){e.target.closest('li').remove()}, 2)
+                jQuery(e.target).closest('li').css('opacity', '0');
+                jQuery(e.target).closest('li').css('height', '0px');
+
+                document.querySelector(".cart-contents-count").innerHTML = response.data.cart_count;
+
+            },
+            error: function(reponse) {
+                alert(response.data.message);
+                jQuery(e.target).find('.spinner').css("display", "none");
+                jQuery(e.target).find('.fa-shopping-cart').css("display", "none");
+            }
+        });
     })
 
     setShareLinks();
@@ -292,17 +297,6 @@ document.addEventListener('DOMContentLoaded', function(e){
             }
 
         })
-
-        document.querySelectorAll('.navbar .nav-item').forEach(function(everyitem){
-
-            everyitem.addEventListener('mouseleave', function(e){
-
-
-            })
-        });
-
     }
-// end if innerWidth
-
 });
 

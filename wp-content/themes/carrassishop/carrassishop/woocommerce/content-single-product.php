@@ -129,37 +129,54 @@ do_action( 'woocommerce_before_single_product' );
                             </figure>
 
                             <aside id="pricetab_pricing">
+                                <?php $variations = $product->get_available_variations(); ?>
+
                                 <div class="price">
-                                    <?php echo $product->get_price_html(); ?> / year
+                                    <div class="price">
+                                        <span class="price">
+                                            <del aria-hidden="true">
+                                                <span class="woocommerce-Price-amount amount">
+                                                    <bdi>
+                                                        <span class="woocommerce-Price-currencySymbol">€</span><span class="value"><?php echo number_format($variations[0]['display_regular_price'], "2", ".", ''); ?></span>
+                                                    </bdi>
+                                                </span>
+                                            </del>
+                                            <ins>
+                                                <span class="woocommerce-Price-amount amount">
+                                                    <bdi>
+                                                        <span class="woocommerce-Price-currencySymbol">€</span><span class="value"><?php echo number_format($variations[0]['display_price'], "2", ".", ''); ?></span>
+                                                    </bdi>
+                                                </span>
+                                            </ins>
+                                        </span> / Year
+                                    </div>
                                 </div>
 
 
-                                <form class="cart" action="<?php echo esc_url( apply_filters( 'woocommerce_add_to_cart_form_action', $product->get_permalink() ) ); ?>" method="post" enctype='multipart/form-data'>
+                                <form id="form_add_to_cart" class="cart" action="<?php echo esc_url( apply_filters( 'woocommerce_add_to_cart_form_action', $product->get_permalink() ) ); ?>" method="post" enctype='multipart/form-data'>
                                     <?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
 
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="pricePlan" id="pricePlan" value="1" checked>
-                                        <label class="form-check-label" for="pricePlan">
-                                            1 Site
-                                        </label>
-                                    </div>
+                                    <input type="hidden" name="id" value="<?php echo $product->get_id(); ?>"/>
 
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="pricePlan" id="pricePlan" value="5">
-                                        <label class="form-check-label" for="pricePlan">
-                                            5 Sites
-                                        </label>
-                                    </div>
+                                    <?php foreach($variations as $index => $variation): ?>
+                                        <?php $test = 1; ?>
+                                        <div class="form-check">
+                                            <input class="form-check-input pricePlan" type="radio" name="pricePlan" id="pricePlan"
+                                                   value="<?php echo $variation['variation_id']?>"
+                                                   <?php echo $index === 0 ? 'checked' : ''; ?>
+                                                   data-regular="<?php echo number_format($variation['display_regular_price'], "2", ".", ''); ?>"
+                                                   data-sale="<?php echo number_format($variation['display_price'], "2", ".", '');?>"
+                                            >
+                                            <label class="form-check-label" for="pricePlan">
+                                                <?php echo __($variation['attributes']['attribute_sites'], 'carrassishop'); ?>
+                                            </label>
+                                        </div>
+                                    <?php endforeach; ?>
 
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="pricePlan" id="pricePlan" value="25">
-                                        <label class="form-check-label" for="pricePlan">
-                                            25 Sites
-                                        </label>
-                                    </div>
+                                    <button type="submit" name="add-to-cart" class="btn-yellow single_add_to_cart_button button alt">
+                                        <div class="spinner-border text-light spinner" role="status" style="display:none;"> </div>
 
-                                    <button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="btn-yellow single_add_to_cart_button button alt">
-                                        <?php echo $product->add_to_cart_text(); ?>
+                                        <i class="fas fa-shopping-cart"></i> <?php _e('Add to cart', 'carrassishop'); ?>
                                     </button>
 
                                     <?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>

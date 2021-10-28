@@ -293,38 +293,81 @@ function carrassi_post_comment() {
 }
 
 
+add_shortcode ('woo_cart_button', 'woo_cart_button' );
+/**
+ * Create Shortcode for WooCommerce Cart Menu Item
+ */
+function woo_cart_button() {
+    ob_start();
 
+    $cart_count = WC()->cart->cart_contents_count; // Set variable for cart item count
+    $cart_url = wc_get_cart_url();  // Set Cart URL
 
-add_shortcode( 'product_reviews', 'bbloomer_product_reviews_shortcode' );
-function bbloomer_product_reviews_shortcode( $atts ) {
+    ?>
+    <li class="nav-item dropdown mt-1">
+        <a class="carrassi_cart dropdown-toggle" data-bs-toggle="dropdown" href="<?php echo $cart_url; ?>" title="<?php _e('Your cart', 'carrassishop'); ?>">
+            <i class="fas fa-shopping-cart"></i>
+            <?php
+            if ( $cart_count > 0 ) {
+                ?>
+                <span class="cart-contents-count"><?php echo $cart_count; ?></span>
+                <?php
+            }
+                ?>
+        </a>
+        <ul class="cart dropdown-menu">
+            <?php
+            $cart_items  = WC()->cart->cart_contents;
+            foreach($cart_items as $cart_id => $cart_item): ?>
+                <?php $product = wc_get_product($cart_item['product_id']); ?>
+                <li>
+                    <div class="dropdown-item" >
+                        <div class="cart_remove_button" data-product_id="<?php echo $cart_item['product_id']; ?>">
+                            <i class="fas fa-times"></i>
+                            <div class="spinner-border text-light spinner" role="status" style="display:none;"> </div>
+                        </div>
+                        <div class="cart_product_icon">
+                            <img width="50" height="50" src="<?php echo get_field('plugin_icon', $product->get_id())['url']; ?>"/>
+                        </div>
+                        <div class="cart_product_name">
+                            <a href="<?php echo $product->get_permalink(); ?>">
+                                <?php echo $product->get_title(); ?>
+                                <?php foreach($cart_item['variation'] as $variation):
+                                    echo " - " . __($variation, 'carrassishop');
+                                endforeach; ?>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+                <li>
+                    <div class="dropdown-item toCheckout" >
+                        <a href="<?php echo wc_get_checkout_url(); ?>">
+                            <i class="fas fa-long-arrow-alt-right"></i> Go to checkout
+                        </a>
+                    </div>
+                </li>
+        </ul>
+    </li>
 
-    if ( empty( $atts ) ) return '';
+    <?php
 
-    if ( ! isset( $atts['id'] ) ) return '';
+    return ob_get_clean();
 
-    $comments = get_comments( 'post_id=' . $atts['id'] );
+}
 
-    if ( ! $comments ) return '';
+add_action('wp_ajax_add_to_cart', 'add_to_cart');
+add_action('wp_ajax_nopriv_add_to_cart', 'add_to_cart');
+function add_to_cart() {
+    $cart = WC()->cart;
+    $product_id = (int)$_REQUEST['form']['id'];
+    $product_var_id = (int)$_REQUEST['form']['pricePlan'];
+    $product_cart_id = $cart->generate_cart_id($product_var_id);
 
-    $html = '';
-    $html .= '<div class="woocommerce-tabs"><div id="reviews"><ol class="commentlist">';
+    if(!$cart->find_product_in_cart($product_cart_id)) {
+        $cart->add_to_cart($product_id);
 
-    foreach ( $comments as $comment ) {
-        $rating = intval( get_comment_meta( $comment->comment_ID, 'rating', true ) );
-        $html .= '<li class="review">';
-        $html .= get_avatar( $comment, '60' );
-        $html .= '<div class="comment-text">';
-        if ( $rating ) $html .= wc_get_rating_html( $rating );
-        $html .= '<p class="meta"><strong class="woocommerce-review__author">';
-        $html .= get_comment_author( $comment );
-        $html .= '</strong></p>';
-        $html .= '<div class="description">';
-        $html .= $comment->comment_content;
-        $html .= '</div></div>';
-        $html .= '</li>';
     }
 
-    $html .= '</ol></div></div>';
-
-    return $html;
+    wp_send_json_success(array('message' => 'success'));
 }

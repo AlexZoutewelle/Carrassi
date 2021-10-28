@@ -36,7 +36,7 @@
                     </button>
 
                     <div class="collapse navbar-collapse" id="csi_navbar">
-                        <ul class="navbar-nav">
+                        <ul class="navbar-nav w-100">
                             <li class="nav-item mt-1">
                                 <a class="nav-link active" aria-current="page" href="#plugins">Plugins</a>
                             </li>
@@ -49,6 +49,7 @@
                             <li class="nav-item mt-1">
                                 <a class="nav-link" href="#contact">Contact</a>
                             </li>
+                            <?php echo do_shortcode('[woo_cart_button]'); ?>
                         </ul>
                     </div>
                 </nav>

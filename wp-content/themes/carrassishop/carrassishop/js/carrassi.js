@@ -44,6 +44,82 @@ document.addEventListener('DOMContentLoaded', function(e){
 
     });
 
+    jQuery('#form_add_to_cart').submit(function(e){
+        e.preventDefault();
+        jQuery(this).find(".spinner").css("display", "inline-block");
+        jQuery(this).find(".fa-shopping-cart").css("display", "none");
+        let form_data = {};
+        jQuery('#form_add_to_cart').serializeArray().map(function(item) {
+            if ( form_data[item.name] ) {
+                if ( typeof(form_data[item.name]) === "string" ) {
+                    form_data[item.name] = [form_data[item.name]];
+                }
+                form_data[item.name].push(item.value);
+            } else {
+                form_data[item.name] = item.value;
+            }
+        });
+
+        let data = {
+            'action' : 'add_to_cart',
+            'form' : form_data
+        }
+
+        jQuery.ajax({
+            url: carrassi_config.ajax_url,
+            type: 'POST',
+            dataType:'json',
+            cache: false,
+            data: data,
+            success: function(response) {
+                alert(response.data.message);
+                jQuery("#form_add_to_cart .spinner").css("display", "none");
+                jQuery("#form_add_to_cart .fa-shopping-cart").css("display", "inline-block");
+            },
+            error: function(reponse) {
+                alert(response.data.message);
+                jQuery("#form_add_to_cart .spinner").css("display", "none");
+                jQuery("#form_add_to_cart .fa-shopping-cart").css("display", "inline-block");
+            }
+        });
+    });
+
+    jQuery(".cart_remove_button").click(function(e){
+        console.log("removing");
+        e.preventDefault();
+
+        jQuery(e.target).closest('li').css('opacity', '0');
+        jQuery(e.target).closest('li').css('height', '0px');
+        //
+        // console.log(e.target);
+        // jQuery(this).find(".spinner").css("display", "inline-block");
+        // jQuery(this).find(".fa-times").css("display", "none");
+        //
+        // let product_id = jQuery(this).data('product_id');
+        // let data = {
+        //     'action' : 'remove_from_cart',
+        //     'product_id' : product_id
+        // }
+        //
+        // jQuery.ajax({
+        //     url: carrassi_config.ajax_url,
+        //     type: 'POST',
+        //     dataType:'json',
+        //     cache: false,
+        //     data: data,
+        //     success: function(response) {
+        // jQuery(e.target).closest('li').css('opacity', '0');
+        // jQuery(e.target).closest('li').css('opacity', '0px');
+        //
+        //     },
+        //     error: function(reponse) {
+        //         alert(response.data.message);
+        //         jQuery(e.target).find('.spinner').css("display", "none");
+        //         jQuery(e.target).find('.fa-shopping-cart').css("display", "none");
+        //     }
+        // });
+    })
+
     setShareLinks();
 
     function open_social_sharing_window(url) {
@@ -160,10 +236,16 @@ document.addEventListener('DOMContentLoaded', function(e){
         e.target.closest(".plugin").querySelector("button").click();
     })
 
-    let usps = jQuery('#key_features .usp');
-    for(var i = 0; i < usps.length; i++) {
-        console.log(usps[i]);
-    }
+    jQuery(".pricePlan").change(function(e) {
+        console.log();
+        let data = jQuery(this).data();
+        let priceSymbol = jQuery(".price del bdi .woocommerce-Price-currencySymbol");
+
+        jQuery(".price del bdi .value").html( data['regular']);
+        jQuery(".price ins bdi .value").html(data['sale']);
+
+    });
+
 
     let btn_toTop = jQuery('.btn-toTop');
     if(btn_toTop.length) {
@@ -186,6 +268,41 @@ document.addEventListener('DOMContentLoaded', function(e){
 
 
     }
+
+
+
+// make it as accordion for smaller screens
+    if (window.innerWidth > 992) {
+        jQuery(".navbar .dropdown").on('mouseover', function(e) {
+            let el_link = jQuery(this).find('a[data-bs-toggle]');
+            if(el_link != null){
+                let nextEl = el_link.next();
+                el_link.addClass('show');
+                nextEl.addClass('show');
+            }
+        });
+
+        jQuery(".navbar .dropdown").on('mouseleave', function(e) {
+            let el_link = jQuery(this).find('a[data-bs-toggle]');
+
+            if(el_link != null){
+                let nextEl = el_link.next();
+                el_link.removeClass('show');
+                nextEl.removeClass('show');
+            }
+
+        })
+
+        document.querySelectorAll('.navbar .nav-item').forEach(function(everyitem){
+
+            everyitem.addEventListener('mouseleave', function(e){
+
+
+            })
+        });
+
+    }
+// end if innerWidth
 
 });
 

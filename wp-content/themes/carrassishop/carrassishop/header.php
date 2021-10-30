@@ -38,18 +38,23 @@
                     <div class="collapse navbar-collapse" id="csi_navbar">
                         <ul class="navbar-nav w-100">
                             <li class="nav-item mt-1">
-                                <a class="nav-link active" aria-current="page" href="#plugins">Plugins</a>
+                                <a class="nav-link active" aria-current="page" href="<?php echo get_home_url(); ?>/#plugins">Plugins</a>
                             </li>
                             <li class="nav-item mt-1">
-                                <a class="nav-link" href="#journal">Journal</a>
+                                <a class="nav-link" href="<?php echo get_home_url(); ?>/#journal">Journal</a>
                             </li>
                             <li class="nav-item mt-1">
-                                <a class="nav-link" href="#about">About</a>
+                                <a class="nav-link" href="<?php echo get_home_url(); ?>/#about">About</a>
                             </li>
                             <li class="nav-item mt-1">
-                                <a class="nav-link" href="#contact">Contact</a>
+                                <a class="nav-link" href="<?php echo get_home_url(); ?>/#contact">Contact</a>
                             </li>
-                            <?php echo do_shortcode('[woo_cart_button]'); ?>
+
+                            <?php if($pagename !== 'checkout'):
+                                echo do_shortcode('[woo_cart_button]');
+
+
+                            endif; ?>
                         </ul>
                     </div>
                 </nav>

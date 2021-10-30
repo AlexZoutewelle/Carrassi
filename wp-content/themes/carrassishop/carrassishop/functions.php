@@ -163,7 +163,7 @@ require get_template_directory() . '/inc/template-functions.php';
 /**
  * Customizer additions.
  */
-require get_template_directory() . '/inc/customizer.php';
+
 
 /**
  * Load Jetpack compatibility file.
@@ -316,31 +316,8 @@ function woo_cart_button() {
                 ?>
         </a>
         <ul class="cart dropdown-menu">
-            <?php
-            $cart_items  = WC()->cart->cart_contents;
-            foreach($cart_items as $cart_id => $cart_item): ?>
-                <?php $product = wc_get_product($cart_item['product_id']); ?>
-                <li>
-                    <div class="dropdown-item" >
-                        <div class="cart_remove_button" data-product_id="<?php echo $cart_item['product_id']; ?>" data-variation_id="<?php echo $cart_item['variation_id']; ?>">
-                            <i class="fas fa-times"></i>
-                            <div class="spinner-border
-                            text-light spinner" role="status" style="display:none;"> </div>
-                        </div>
-                        <div class="cart_product_icon">
-                            <img width="50" height="50" src="<?php echo get_field('plugin_icon', $product->get_id())['url']; ?>"/>
-                        </div>
-                        <div class="cart_product_name">
-                            <a href="<?php echo $product->get_permalink(); ?>">
-                                <?php echo $product->get_title(); ?>
-                                <?php foreach($cart_item['variation'] as $variation):
-                                    echo " - " . __($variation, 'carrassishop');
-                                endforeach; ?>
-                            </a>
-                        </div>
-                    </div>
-                </li>
-            <?php endforeach; ?>
+            <?php echo do_shortcode('[woocommerce_cart]');
+            if(WC()->cart->get_cart_contents_count() > 0 ) : ?>
                 <li>
                     <div class="dropdown-item toCheckout" >
                         <a href="<?php echo wc_get_checkout_url(); ?>">
@@ -348,6 +325,41 @@ function woo_cart_button() {
                         </a>
                     </div>
                 </li>
+            <?php endif;
+//            $cart_items  = WC()->cart->cart_contents;
+//            foreach($cart_items as $cart_id => $cart_item): ?>
+<!--                --><?php //$product = wc_get_product($cart_item['product_id']); ?>
+<!--                <li id="--><?php //echo "product_" . $cart_item['product_id'] . "_" . $cart_item['variation_id']; ?><!--">-->
+<!--                    <div class="dropdown-item" >-->
+<!--                        <div class="cart_remove_button" data-source="header" data-product_id="--><?php //echo $cart_item['product_id']; ?><!--" data-variation_id="--><?php //echo $cart_item['variation_id']; ?><!--">-->
+<!--                            <i class="fas fa-times"></i>-->
+<!--                            <div class="spinner-border-->
+<!--                            text-light spinner" role="status" style="display:none;"> </div>-->
+<!--                        </div>-->
+<!--                        <div class="cart_product_icon">-->
+<!--                            <img width="50" height="50" src="--><?php //echo get_field('plugin_icon', $product->get_id())['url']; ?><!--"/>-->
+<!--                        </div>-->
+<!--                        <div class="cart_product_name">-->
+<!--                            <a href="--><?php //echo $product->get_permalink(); ?><!--">-->
+<!--                                --><?php //echo $product->get_title(); ?>
+<!--                                --><?php //foreach($cart_item['variation'] as $variation):
+//                                    echo " - " . __($variation, 'carrassishop');
+//                                endforeach; ?>
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                        <div class="product_price">-->
+<!--                            --><?php //echo " -  " . wc_price($cart_item['line_total']);  ?>
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </li>-->
+<!--            --><?php //endforeach; ?>
+<!--                <li>-->
+<!--                    <div class="dropdown-item toCheckout" >-->
+<!--                        <a href="--><?php //echo wc_get_checkout_url(); ?><!--">-->
+<!--                            <i class="fas fa-long-arrow-alt-right"></i> Go to checkout-->
+<!--                        </a>-->
+<!--                    </div>-->
+<!--                </li>-->
         </ul>
     </li>
 
@@ -389,5 +401,103 @@ function remove_from_cart() {
         }
     }
 
-    wp_send_json_success(array('cart_count' => $cart->get_cart_contents_count()));
+    ob_start();
+    echo do_shortcode('[woocommerce_cart]');
+    $cart_html = ob_get_clean();
+
+    wp_send_json_success(
+        array(
+            'cart_count' => $cart->get_cart_contents_count(),
+            'product_id' => $_REQUEST['product_id'],
+            'variation_id' => $_REQUEST['variation_id'],
+            'cart_html' => $cart_html
+        )
+    );
+}
+
+add_filter( 'woocommerce_checkout_coupon_message', 'coupon_message');
+function coupon_message() {
+    return '<i class="fas fa-ticket-alt"></i> Have a coupon? <a href="#" class="showcoupon">Click here to enter your discount code</a>';
+}
+
+add_action('woocommerce_after_checkout_form','checkout_cart');
+function checkout_cart(){
+    echo do_shortcode('[woocommerce_cart]');
+}
+
+add_filter( 'woocommerce_checkout_fields' , 'alter_woocommerce_checkout_fields' );
+function alter_woocommerce_checkout_fields( $fields ) {
+    unset($fields['shipping']);
+    unset($fields['billing']['billing_address_1']);
+    unset($fields['billing']['billing_address_2']);
+    unset($fields['billing']['billing_postcode']);
+    unset($fields['billing']['billing_state']);
+    unset($fields['billing']['billing_city']);
+    unset($fields['billing']['billing_phone']);
+
+    return $fields;
+}
+
+add_filter( 'woocommerce_enable_order_notes_field', '__return_false', 9999 );
+
+function checkout_page_cart() {
+    ob_start();
+
+    $cart_count = WC()->cart->cart_contents_count; // Set variable for cart item count
+    $cart_url = wc_get_cart_url();  // Set Cart URL
+
+    ?>
+    <li class="nav-item dropdown mt-1 cart_nav_item">
+        <a class="carrassi_cart dropdown-toggle" data-bs-toggle="dropdown" href="<?php echo $cart_url; ?>" title="<?php _e('Your cart', 'carrassishop'); ?>">
+            <i class="fas fa-shopping-cart"></i>
+            <?php
+            if ( $cart_count > 0 ) {
+                ?>
+                <span class="cart-contents-count"><?php echo $cart_count; ?></span>
+                <?php
+            }
+            ?>
+        </a>
+        <ul class="cart dropdown-menu">
+            <?php
+            $cart_items  = WC()->cart->cart_contents;
+            foreach($cart_items as $cart_id => $cart_item): ?>
+                <?php $product = wc_get_product($cart_item['product_id']); ?>
+                <li>
+                    <div class="dropdown-item" >
+                        <div class="cart_remove_button" data-source="checkout" data-product_id="<?php echo $cart_item['product_id']; ?>" data-variation_id="<?php echo $cart_item['variation_id']; ?>">
+                            <i class="fas fa-times"></i>
+                            <div class="spinner-border
+                            text-light spinner" role="status" style="display:none;"> </div>
+                        </div>
+                        <div class="cart_product_icon">
+                            <img width="50" height="50" src="<?php echo get_field('plugin_icon', $product->get_id())['url']; ?>"/>
+                        </div>
+                        <div class="cart_product_name">
+                            <a href="<?php echo $product->get_permalink(); ?>">
+                                <?php echo $product->get_title(); ?>
+                                <?php foreach($cart_item['variation'] as $variation):
+                                    echo " - " . __($variation, 'carrassishop');
+                                endforeach; ?>
+                            </a>
+                        </div>
+                        <div class="product_price">
+                            <?php echo " -  " . wc_price($cart_item['line_total']);  ?>
+                        </div>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+            <li>
+                <div class="dropdown-item toCheckout" >
+                    <a href="<?php echo wc_get_checkout_url(); ?>">
+                        <i class="fas fa-long-arrow-alt-right"></i> Go to checkout
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </li>
+
+    <?php
+
+    return ob_get_clean();
 }

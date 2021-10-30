@@ -91,6 +91,14 @@ do_action( 'woocommerce_before_single_product' );
                 <div class="row prod_sum_row">
                     <div class="col-12 col-md-8 p-5 prod_sum_desc">
                         <header>
+
+                            <?php $coming_soon = !empty(wp_get_post_terms($product->get_id(), 'product_tag', array("slug" => "coming_soon")));?>
+                            <?php if($coming_soon): ?>
+                                <div class="coming_soon_status">
+                                    Coming soon!
+                                </div>
+                            <?php endif; ?>
+
                             <img class="product_logo" src="<?php echo get_field('plugin_icon', $product->get_id())['url']; ?>"/>
                             <h1><strong><?php echo $product->get_title(); ?></strong></h1>
                             <br>
@@ -159,7 +167,6 @@ do_action( 'woocommerce_before_single_product' );
                                     <input type="hidden" name="id" value="<?php echo $product->get_id(); ?>"/>
 
                                     <?php foreach($variations as $index => $variation): ?>
-                                        <?php $test = 1; ?>
                                         <div class="form-check">
                                             <input class="form-check-input pricePlan" type="radio" name="pricePlan" id="pricePlan"
                                                    value="<?php echo $variation['variation_id']?>"
@@ -173,11 +180,20 @@ do_action( 'woocommerce_before_single_product' );
                                         </div>
                                     <?php endforeach; ?>
 
-                                    <button type="submit" name="add-to-cart" class="btn-yellow single_add_to_cart_button button alt">
-                                        <div class="spinner-border text-light spinner" role="status" style="display:none;"> </div>
+                                    <?php $coming_soon = !empty(wp_get_post_terms($product->get_id(), 'product_tag', array("slug" => "coming_soon")));?>
 
-                                        <i class="fas fa-shopping-cart"></i> <?php _e('Add to cart', 'carrassishop'); ?>
-                                    </button>
+                                    <?php if(!$coming_soon): ?>
+                                        <button type="submit" name="add-to-cart" class="btn-yellow single_add_to_cart_button button alt">
+                                            <div class="spinner-border text-light spinner" role="status" style="display:none;"> </div>
+
+                                            <i class="fas fa-shopping-cart"></i> <?php _e('Add to cart', 'carrassishop'); ?>
+                                        </button>
+                                    <?php else: ?>
+                                        <button type="button" name="subscribe_to_mailinglist" class="btn-yellow btn button alt">
+                                                <i class="fas fa-envelope"></i> <?php _e('Subscribe to mailing list', 'carrassishop'); ?>
+                                        </button>
+                                    <?php endif ?>
+
 
                                     <?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
                                 </form>

@@ -48,12 +48,13 @@ get_header();
         </section>
 
         <section class="product_highlight" id="plugins">
-            <div class="row g-0 text-center section_title py-5">
-                <h1>
-                    Our latest plugins
-                </h1>
-            </div>
-            <div class="row g-0 justify-content-center">
+            <div class="container">
+                <div class="row g-0 text-center section_title py-5">
+                    <h1>
+                        Our latest plugins
+                    </h1>
+                </div>
+                <div class="row g-0 justify-content-center">
 
                     <?php
                     $plugins = wc_get_products(
@@ -64,7 +65,15 @@ get_header();
                     );
 
                     foreach($plugins as $plugin): ?>
-                        <div class="col-sm-12 col-md-6 col-lg-4 plugin_wrap">
+                        <?php $coming_soon = !empty(wp_get_post_terms($plugin->get_id(), 'product_tag', array("slug" => "coming_soon")));?>
+
+                        <div class="col-sm-12 col-md-6 col-lg-4 plugin_wrap ">
+                            <?php if($coming_soon): ?>
+                                <div class="coming_soon_status">
+                                    Coming soon!
+                                </div>
+                            <?php endif; ?>
+
                             <div class="plugin">
                                 <div class="container d-flex flex-column plugin_content">
                                     <div class="plugin_logo">
@@ -84,14 +93,23 @@ get_header();
 
                                     <div class="plugin_illustration" style="background:url(<?php echo get_field('plugin_illustration', $plugin->get_id())['url']; ?>)">
                                     </div>
+
+
                                 </div>
                             </div>
                         </div>
 
+                        <div class="col-sm-12 col-md-6 col-lg-4 plugin_wrap ">
+                            <?php if($coming_soon): ?>
+                            <div class="coming_soon_status">
+                                Coming soon!
+                            </div>
 
-                        <div class="col-sm-12 col-md-6 col-lg-4 plugin_wrap">
                             <div class="plugin">
                                 <div class="container d-flex flex-column plugin_content">
+
+                                    <?php endif;?>
+
                                     <div class="plugin_logo">
                                         <img src="<?php echo get_field('plugin_icon', $plugin->get_id())['url']; ?>"/>
                                     </div>
@@ -109,14 +127,23 @@ get_header();
 
                                     <div class="plugin_illustration" style="background:url(<?php echo get_field('plugin_illustration', $plugin->get_id())['url']; ?>)">
                                     </div>
+
+
                                 </div>
                             </div>
                         </div>
 
+                        <div class="col-sm-12 col-md-6 col-lg-4 plugin_wrap ">
+                            <?php if($coming_soon): ?>
+                            <div class="coming_soon_status">
+                                Coming soon!
+                            </div>
 
-                        <div class="col-sm-12 col-md-6 col-lg-4 plugin_wrap">
                             <div class="plugin">
                                 <div class="container d-flex flex-column plugin_content">
+
+                                    <?php endif;?>
+
                                     <div class="plugin_logo">
                                         <img src="<?php echo get_field('plugin_icon', $plugin->get_id())['url']; ?>"/>
                                     </div>
@@ -134,13 +161,16 @@ get_header();
 
                                     <div class="plugin_illustration" style="background:url(<?php echo get_field('plugin_illustration', $plugin->get_id())['url']; ?>)">
                                     </div>
+
+
                                 </div>
                             </div>
                         </div>
-
                     <?php endforeach; ?>
 
                 </div>
+
+            </div>
 
         </section>
 

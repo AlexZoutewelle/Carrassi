@@ -62,12 +62,12 @@
                 );
 
                 ?>
-            </div><!-- .entry-content -->
+            </div>
 
-            <footer class="entry-footer">
-                <?php carrassishop_entry_footer(); ?>
-            </footer><!-- .entry-footer -->
+<!--            <footer class="entry-footer">-->
+<!--                --><?php //carrassishop_entry_footer(); ?>
+<!--            </footer>-->
         </div>
 
     </div>
-</article><!-- #post-<?php the_ID(); ?> -->
+</article><?php the_ID(); ?>

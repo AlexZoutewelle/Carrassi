@@ -255,11 +255,14 @@ document.addEventListener('DOMContentLoaded', function(e){
 
         let product_id = jQuery(this).data('product_id');
         let variation_id = jQuery(this).data('variation_id');
+        let source = jQuery(this).data('source');
 
+        console.log(source);
         let data = {
             'action' : 'remove_from_cart',
             'product_id' : product_id,
-            'variation_id' : variation_id
+            'variation_id' : variation_id,
+            'source' : source
         }
 
         jQuery.ajax({
@@ -269,12 +272,23 @@ document.addEventListener('DOMContentLoaded', function(e){
             cache: false,
             data: data,
             success: function(response) {
-                setTimeout(function(){e.target.closest('li').remove()}, 2)
-                jQuery(e.target).closest('li').css('opacity', '0');
-                jQuery(e.target).closest('li').css('height', '0px');
 
-                document.querySelector(".cart-contents-count").innerHTML = response.data.cart_count;
+                console.log(document.querySelector(".carrassi_cart_contents"));
+                console.log(jQuery(".carassi_cart_contents"));
+                jQuery(".carrassi_cart_contents").html(response.data.cart_html);
+                jQuery(".cart_remove_button").click( remove_cart_item);
+                let cart_count = document.querySelector(".cart-contents-count");
+                if(cart_count !== null) {
+                    cart_count.innerHTML = response.data.cart_count;
 
+                    let toCheckoutbtn = document.querySelector('.toCheckout');
+                    if(parseInt(response.data.cart_count) > 0) {
+                        toCheckoutbtn.style.display = "block";
+                    }
+                    else {
+                        toCheckoutbtn.style.display = 'none';
+                    }
+                }
             },
             error: function(reponse) {
                 alert(response.data.message);

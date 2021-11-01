@@ -23,6 +23,9 @@ global $product;
 if ( empty( $product ) || ! $product->is_visible() ) {
 	return;
 }
+
+$coming_soon = !empty(wp_get_post_terms($product->get_id(), 'product_tag', array("slug" => "coming_soon")));
+
 do_action( 'woocommerce_before_single_product' );
 ?>
 
@@ -100,7 +103,7 @@ do_action( 'woocommerce_before_single_product' );
                             <?php endif; ?>
 
                             <img class="product_logo" src="<?php echo get_field('plugin_icon', $product->get_id())['url']; ?>"/>
-                            <h1><strong><?php echo $product->get_title(); ?></strong></h1>
+                            <h1><strong><?php echo $product->get_title(); ?></strong></h1>Ú
                             <br>
                             <p><strong><?php echo $product->get_description(); ?></strong></p>
                             <br>
@@ -180,7 +183,6 @@ do_action( 'woocommerce_before_single_product' );
                                         </div>
                                     <?php endforeach; ?>
 
-                                    <?php $coming_soon = !empty(wp_get_post_terms($product->get_id(), 'product_tag', array("slug" => "coming_soon")));?>
 
                                     <?php if(!$coming_soon): ?>
                                         <button type="submit" name="add-to-cart" class="btn-yellow single_add_to_cart_button button alt">
@@ -189,8 +191,8 @@ do_action( 'woocommerce_before_single_product' );
                                             <i class="fas fa-shopping-cart"></i> <?php _e('Add to cart', 'carrassishop'); ?>
                                         </button>
                                     <?php else: ?>
-                                        <button type="button" name="subscribe_to_mailinglist" class="btn-yellow btn button alt">
-                                                <i class="fas fa-envelope"></i> <?php _e('Subscribe to mailing list', 'carrassishop'); ?>
+                                        <button type="button" name="subscribe_to_mailinglist" class="btn-yellow btn button alt" data-bs-toggle="modal" data-bs-target="#mail_sub_modal">
+                                            <i class="fas fa-envelope"></i> <?php _e('Subscribe to mailing list', 'carrassishop'); ?>
                                         </button>
                                     <?php endif ?>
 
@@ -379,3 +381,22 @@ do_action( 'woocommerce_before_single_product' );
     </article>
 </main>
 
+
+<?php if($coming_soon): ?>
+    <!-- Modal -->
+    <div class="modal fade" id="mail_sub_modal" tabindex="-1" aria-labelledby="mail_sub_modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><?php echo __("Want regular updates on the state of ", "carrassishop") . " " . get_field("plugin_name", $product->get_id()) . "?";  ?></h5>
+<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+                </div>
+                <div class="modal-body">
+                    <?php echo do_shortcode('[mc4wp_form id="103"]'); ?>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

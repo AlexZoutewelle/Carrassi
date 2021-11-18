@@ -23,17 +23,14 @@ defined( 'ABSPATH' ) || exit;
 
     <form class="woocommerce-cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
         <?php do_action( 'woocommerce_before_cart_table' ); ?>
-        <table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents" cellspacing="0">
-            <thead>
-            <tr>
-                <th class="product-remove">&nbsp;</th>
-                <th class="product-thumbnail">&nbsp;</th>
-                <th class="product-name"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
-                <th class="product-price"><?php esc_html_e( 'Price', 'woocommerce' ); ?></th>
-                <th class="product-subtotal"><?php esc_html_e( 'Subtotal', 'woocommerce' ); ?></th>
-            </tr>
-            </thead>
-            <tbody>
+        <div class="container shop_table shop_table_responsive cart woocommerce-cart-form__contents" cellspacing="0">
+            <div class="row cart_item_header">
+                <div class="d-none d-sm-block col-sm-1 col-md-1  product-remove">&nbsp;</div>
+                <div class="d-none d-sm-block col-sm-2 col-md-2  product-thumbnail">&nbsp;</div>
+                <div class="d-none d-sm-block col-sm-5 col-md-5 product-name"><?php esc_html_e( 'Product', 'woocommerce' ); ?></div>
+                <div class="d-none d-sm-block col-sm-2 col-md-2 product-price"><?php esc_html_e( 'Price', 'woocommerce' ); ?></div>
+                <div class="d-none d-sm-block col-sm-2 col-md-2 product-subtotal"><?php esc_html_e( 'Subtotal', 'woocommerce' ); ?></div>
+            </div>
             <?php do_action( 'woocommerce_before_cart_contents' ); ?>
 
             <?php
@@ -44,9 +41,9 @@ defined( 'ABSPATH' ) || exit;
                 if ( $_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters( 'woocommerce_cart_item_visible', true, $cart_item, $cart_item_key ) ) {
                     $product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );
                     ?>
-                    <tr class="woocommerce-cart-form__cart-item <?php echo esc_attr( apply_filters( 'woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key ) ); ?>">
+                    <div class="text-center text-sm-start row woocommerce-cart-form__cart-item <?php echo esc_attr( apply_filters( 'woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key ) ); ?>">
 
-                        <td class="product-remove">
+                        <div class="col-12 col-sm-1 col-md-1 product-remove">
                             <div class="cart_remove_button" data-source="checkout" data-product_id="<?php echo $cart_item['product_id']; ?>" data-variation_id="<?php echo $cart_item['variation_id']; ?>">
                                 <i class="fas fa-times"></i>
                                 <div class="spinner-border
@@ -66,9 +63,9 @@ defined( 'ABSPATH' ) || exit;
                             //									$cart_item_key
                             //								);
                             //							?>
-                        </td>
+                        </div>
 
-                        <td class="product-thumbnail">
+                        <div class="col-12 col-sm-2 col-md-2 product-thumbnail">
 
                             <a href="<?php wc_get_product($cart_item['product_id'])->get_permalink(); ?>">
                                 <img width="50" height="50" src="<?php echo get_field('plugin_icon', $product_id)['url']; ?>"/>
@@ -82,9 +79,9 @@ defined( 'ABSPATH' ) || exit;
                             //							printf( '<a href="%s">%s</a>', esc_url( $product_permalink ), $thumbnail ); // PHPCS: XSS ok.
                             //						}
                             //						?>
-                        </td>
+                        </div>
 
-                        <td class="product-name" data-title="<?php esc_attr_e( 'Product', 'woocommerce' ); ?>">
+                        <div class="col-12 col-sm-5 col-md-5 product-name" data-title="<?php esc_attr_e( 'Product', 'woocommerce' ); ?>">
                             <?php
                             if ( ! $product_permalink ) {
                                 echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key ) . '&nbsp;' );
@@ -102,20 +99,20 @@ defined( 'ABSPATH' ) || exit;
                                 echo wp_kses_post( apply_filters( 'woocommerce_cart_item_backorder_notification', '<p class="backorder_notification">' . esc_html__( 'Available on backorder', 'woocommerce' ) . '</p>', $product_id ) );
                             }
                             ?>
-                        </td>
+                        </div>
 
-                        <td class="product-price" data-title="<?php esc_attr_e( 'Price', 'woocommerce' ); ?>">
+                        <div class="col-12 col-sm-2 col-md-2 product-price" data-title="<?php esc_attr_e( 'Price', 'woocommerce' ); ?>">
                             <?php
                             echo apply_filters( 'woocommerce_cart_item_price', WC()->cart->get_product_price( $_product ), $cart_item, $cart_item_key ); // PHPCS: XSS ok.
                             ?>
-                        </td>
+                        </div>
 
-                        <td class="product-subtotal" data-title="<?php esc_attr_e( 'Subtotal', 'woocommerce' ); ?>">
+                        <div class="d-none d-sm-block col-sm-2 col-md-2 product-subtotal " data-title="<?php esc_attr_e( 'Subtotal', 'woocommerce' ); ?>">
                             <?php
                             echo apply_filters( 'woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ), $cart_item, $cart_item_key ); // PHPCS: XSS ok.
                             ?>
-                        </td>
-                    </tr>
+                        </div>
+                    </div>
                     <?php
                 }
             }
@@ -125,27 +122,27 @@ defined( 'ABSPATH' ) || exit;
             <?php do_action( 'woocommerce_cart_contents' ); ?>
 
 
-                <tr class="cart-subtotal">
-                    <td></td> <td></td> <td></td>
-                    <td><?php esc_html_e( 'Subtotal', 'woocommerce' ); ?></td>
-                    <td data-title="<?php esc_attr_e( 'Subtotal', 'woocommerce' ); ?>"><?php wc_cart_totals_subtotal_html(); ?></td>
-                </tr>
+                <div class="row cart-subtotal">
+                    <div class="col-9 col-sm-1">&nbsp;<?php esc_html_e( 'Subtotal', 'woocommerce' ); ?> </div>
+                    <div class="d-none d-sm-block col-sm-9"></div>
+                    <div class="col-3 col-sm-2"><?php wc_cart_totals_subtotal_html(); ?></div>
+                </div>
 
                 <?php foreach ( WC()->cart->get_coupons() as $code => $coupon ) : ?>
-                    <tr class="cart-discount coupon-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
+                    <div class="row cart-discount coupon-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
                         <td></td> <td></td> <td></td>
                         <td><?php wc_cart_totals_coupon_label( $coupon ); ?></td>
                         <td data-title="<?php echo esc_attr( wc_cart_totals_coupon_label( $coupon, false ) ); ?>"><?php wc_cart_totals_coupon_html( $coupon ); ?></td>
-                    </tr>
+                    </div>
                 <?php endforeach; ?>
 
 
                 <?php foreach ( WC()->cart->get_fees() as $fee ) : ?>
-                    <tr class="fee">
+                    <div class="row fee">
                         <td></td> <td></td> <td></td>
                         <td><?php echo esc_html( $fee->name ); ?></td>
                         <td data-title="<?php echo esc_attr( $fee->name ); ?>"><?php wc_cart_totals_fee_html( $fee ); ?></td>
-                    </tr>
+                    </div>
                 <?php endforeach; ?>
 
                 <?php
@@ -161,32 +158,33 @@ defined( 'ABSPATH' ) || exit;
                     if ( 'itemized' === get_option( 'woocommerce_tax_total_display' ) ) {
                         foreach ( WC()->cart->get_tax_totals() as $code => $tax ) { // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
                             ?>
-                            <tr class="tax-rate tax-rate-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
+                            <div class=" rowtax-rate tax-rate-<?php echo esc_attr( sanitize_title( $code ) ); ?>">
                                 <th><?php echo esc_html( $tax->label ) . $estimated_text; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></th>
                                 <td data-title="<?php echo esc_attr( $tax->label ); ?>"><?php echo wp_kses_post( $tax->formatted_amount ); ?></td>
-                            </tr>
+                            </div>
                             <?php
                         }
                     } else {
                         ?>
-                        <tr class="tax-total">
+                        <div class="row tax-total">
                             <th><?php echo esc_html( WC()->countries->tax_or_vat() ) . $estimated_text; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></th>
                             <td data-title="<?php echo esc_attr( WC()->countries->tax_or_vat() ); ?>"><?php wc_cart_totals_taxes_total_html(); ?></td>
-                        </tr>
+                        </div>
                         <?php
                     }
                 }
                 ?>
 
 
-                <tr class="order-total">
-                    <td></td> <td></td> <td></td>
-                    <td><?php esc_html_e( 'Total', 'woocommerce' ); ?></td>
-                    <td data-title="<?php esc_attr_e( 'Total', 'woocommerce' ); ?>"><?php wc_cart_totals_order_total_html(); ?></td>
-                </tr>
+                <div class="row order-total">
 
-            </tbody>
-        </table>
+
+                    <div class="col-9 col-sm-1">&nbsp;<?php esc_html_e( 'Total', 'woocommerce' ); ?> </div>
+                    <div class="d-none d-sm-block col-sm-9"></div>
+                    <div class="col-3 col-sm-2"><?php wc_cart_totals_order_total_html(); ?></div>
+                </div>
+
+        </div>
         <?php do_action( 'woocommerce_after_cart_table' ); ?>
     </form>
 

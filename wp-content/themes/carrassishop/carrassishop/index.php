@@ -101,15 +101,13 @@ get_header();
 
                         <div class="col-sm-12 col-md-6 col-lg-4 plugin_wrap ">
                             <?php if($coming_soon): ?>
-                            <div class="coming_soon_status">
-                                Coming soon!
-                            </div>
+                                <div class="coming_soon_status">
+                                    Coming soon!
+                                </div>
+                            <?php endif; ?>
 
                             <div class="plugin">
                                 <div class="container d-flex flex-column plugin_content">
-
-                                    <?php endif;?>
-
                                     <div class="plugin_logo">
                                         <img src="<?php echo get_field('plugin_icon', $plugin->get_id())['url']; ?>"/>
                                     </div>
@@ -135,15 +133,13 @@ get_header();
 
                         <div class="col-sm-12 col-md-6 col-lg-4 plugin_wrap ">
                             <?php if($coming_soon): ?>
-                            <div class="coming_soon_status">
-                                Coming soon!
-                            </div>
+                                <div class="coming_soon_status">
+                                    Coming soon!
+                                </div>
+                            <?php endif; ?>
 
                             <div class="plugin">
                                 <div class="container d-flex flex-column plugin_content">
-
-                                    <?php endif;?>
-
                                     <div class="plugin_logo">
                                         <img src="<?php echo get_field('plugin_icon', $plugin->get_id())['url']; ?>"/>
                                     </div>
@@ -166,6 +162,8 @@ get_header();
                                 </div>
                             </div>
                         </div>
+
+
                     <?php endforeach; ?>
 
                 </div>

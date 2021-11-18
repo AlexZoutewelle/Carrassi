@@ -21,7 +21,7 @@ if ( ! is_ajax() ) {
 	do_action( 'woocommerce_review_order_before_payment' );
 }
 ?>
-<div id="payment" class="woocommerce-checkout-payment container">
+<div id="payment" class="woocommerce-checkout-payment">
 	<?php if ( WC()->cart->needs_payment() ) : ?>
 		<div class="wc_payment_methods payment_methods methods row">
             <h3><?php esc_html_e("Payment method", "carrassishop"); ?></h3>

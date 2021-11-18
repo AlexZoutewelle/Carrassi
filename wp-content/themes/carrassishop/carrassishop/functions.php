@@ -501,3 +501,24 @@ function checkout_page_cart() {
 
     return ob_get_clean();
 }
+
+
+
+/** Enqueue blog post scripts **/
+add_action("wp_enqueue_scripts", "enqueue_blog_post_scripts");
+function enqueue_blog_post_scripts() {
+    if(get_post_type() == "post") {
+        $post = get_post();
+        $js = get_field("blog_js_enq", get_post()->ID);
+        $css = get_field("blog_css_enq", get_post()->ID);
+
+        if(!empty($js)) {
+            wp_enqueue_script( $js, get_template_directory_uri() . '/blog_post_assets/js/' . $js . ".js" );
+        }
+        if(!empty($css)) {
+            wp_enqueue_style( $css , get_template_directory_uri() . '/blog_post_assets/css/' . $css . ".css" );
+
+        }
+    }
+    $test =1;
+}

@@ -1,0 +1,57 @@
+.tadbj_container_ui {
+    padding: 10px;
+    display:flex;
+    flex-direction: row;
+    /* float: right; */
+    /* width: 50%; */
+    /* background-color: #fff0cf36; */
+    /* inset: -51px; */
+    /* box-shadow: inset 2px 4px 9px 1px #383c3f; */
+    position: relative;
+    border-radius: 5px;
+}
+
+.tadbj_container_ui > div {
+    margin: 3px;
+    height: 100px;
+}
+
+.tadbj_img_target {
+    display: flex;
+    justify-content: center;
+}
+
+.tadbj_img_target  img {
+    background-color: #595753;
+    width: auto !important;
+    height: 212px!important;
+    padding: 5px;
+    margin-left: unset;
+    /* border: 1px solid #0d6ef1; */
+    margin: 5px;
+}
+
+.tadbj_console {
+    flex: 4;
+    background-color: #dfdfc5;
+}
+
+.tadbj_console_text {
+    color: black;
+    overflow-y: scroll;
+    height: 100%;
+    padding: 1px 5px 0px 5px;
+}
+
+
+.tadbj_colorpicker_wrapper {
+    flex:1;
+    font-size: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+input {
+    accent-color: #dd9a00;
+}

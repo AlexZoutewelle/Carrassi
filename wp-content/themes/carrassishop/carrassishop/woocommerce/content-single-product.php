@@ -40,7 +40,7 @@ do_action( 'woocommerce_before_single_product' );
 		"name": "<?php echo $product->get_id(); ?>",
  		"image": [
         "<?php echo get_field('plugin_icon', $product->get_id())['url']; ?>",
-        "<?php  echo get_field('plugin_illustration', $product->get_id())['url'];?>",
+        "<?php  echo get_field('plugin_illustration', $product->get_id())['url'];?>"
        ],
       "description": "<?php echo $product->get_short_description(); ?>",
       "sku": "<?php echo $product->get_id(); ?>",
@@ -103,7 +103,7 @@ do_action( 'woocommerce_before_single_product' );
                             <?php endif; ?>
 
                             <img class="product_logo" src="<?php echo get_field('plugin_icon', $product->get_id())['url']; ?>"/>
-                            <h1><strong><?php echo $product->get_title(); ?></strong></h1>Ú
+                            <h1><strong><?php echo $product->get_title(); ?></strong></h1>
                             <br>
                             <p><strong><?php echo $product->get_description(); ?></strong></p>
                             <br>

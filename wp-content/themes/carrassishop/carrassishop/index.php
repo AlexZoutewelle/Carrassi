@@ -30,7 +30,7 @@ get_header();
                             </h1>
                         </div>
                     </div>
-                    <img src="http://carrassi/wp-content/uploads/2021/10/polygirl_rescuedvec.svg">
+                    <img src="http://carrassi/wp-content/uploads/2021/11/polygirl_shadow.svg">
 
                     <div class="attract-button">
                         <a href="#plugins" >

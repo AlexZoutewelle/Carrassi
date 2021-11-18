@@ -282,7 +282,7 @@ button.btn-purple:hover {
 .attract-button {
 	/** Button container **/
 	text-align:center;
-
+	z-index: 2;
 }
 .attract button {
 
@@ -377,7 +377,7 @@ button.btn-purple:hover {
 	/* box-shadow: inset -7px 0px 49px #000000; */
 	color:#D9D9D9;
 	height:82vh;
-	padding: 0px 5vh;
+	padding: 0px 4vh;
 	background: rgb(29,25,31);
 	background: -moz-linear-gradient(180deg, rgba(29,25,31,1) 0%, rgb(29, 25, 31) 65%, rgba(55,60,63,1) 100%);
 	background: -webkit-linear-gradient(180deg, rgba(29,25,31,1) 0%, rgba(29,25,31,1) 65%, rgba(55,60,63,1) 100%);

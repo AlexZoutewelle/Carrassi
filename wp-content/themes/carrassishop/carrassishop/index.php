@@ -26,7 +26,7 @@ get_header();
                     <div class="col-12 attract-l">
                         <div class="attract-text">
                             <h1>
-                                Making your <br> WordPress website <span class="text_emphasis">sing</span>
+                                Making your <br> <span class="text_alternating">WordPress website</span> <span class="text_emphasis">sing</span>
                             </h1>
                         </div>
                     </div>
@@ -59,7 +59,7 @@ get_header();
                     <?php
                     $plugins = wc_get_products(
                         array(
-                            'category' => array('plugin'),
+                            'category' => array('plugin', 'android'),
                             'limit' => '3'
                         )
                     );
@@ -67,7 +67,15 @@ get_header();
                     foreach($plugins as $plugin): ?>
                         <?php $coming_soon = !empty(wp_get_post_terms($plugin->get_id(), 'product_tag', array("slug" => "coming_soon")));?>
 
-                        <div class="col-sm-12 col-md-6 col-lg-4 plugin_wrap ">
+                        <?php
+
+                            $color_primary = get_field('product_palette_main', $plugin->get_id());
+                            $color_secondary = get_field('product_palette_sec', $plugin->get_id());
+                            $color_accent = get_field('product_palette_accent', $plugin->get_id());
+
+                            $test = 1;
+                        ?>
+                        <div class="col-sm-12 col-md-6 col-lg-5 plugin_wrap ">
                             <?php if($coming_soon): ?>
                                 <div class="coming_soon_status">
                                     Coming soon!
@@ -75,18 +83,32 @@ get_header();
                             <?php endif; ?>
 
                             <div class="plugin">
-                                <div class="container d-flex flex-column plugin_content">
+                                <div class="container d-flex flex-column plugin_content"
+                                     style=" background: <?php echo $color_secondary; ?>;
+                                             background: -moz-linear-gradient( 180deg, <?php echo $color_secondary; ?> 0%, <?php echo $color_secondary; ?> 65%, <?php echo $color_primary; ?> 100%);
+                                             background: -webkit-linear-gradient( 180deg, <?php echo $color_secondary; ?> 0%, <?php echo $color_secondary; ?> 65%, <?php echo $color_primary; ?> 100%);
+                                             background: linear-gradient( 0deg, <?php echo $color_primary; ?> 0%, <?php echo $color_secondary; ?> 65%, #1d191f 100%);">
+
                                     <div class="plugin_logo">
                                         <img src="<?php echo get_field('plugin_icon', $plugin->get_id())['url']; ?>"/>
                                     </div>
 
                                     <div class="plugin_title">
-                                        <h2 class="mb-4" ><strong><?php echo $plugin->get_title(); ?></strong></h2>
-                                        <p>  <?php echo $plugin->get_short_description(); ?> </p>
+                                        <h2 ><strong><?php echo $plugin->get_title(); ?></strong></h2>
+                                    </div>
+
+                                    <div class="plugin_subtitle">
+                                        <h6 class="mb-2"><strong><?php echo get_field('plugin_subtitle', $plugin->get_id()); ?></strong></h6>
+                                    </div>
+
+                                    <div class="plugin_description">
+                                        <p class="plugin_short_description">  <?php echo $plugin->get_short_description(); ?> </p>
                                     </div>
 
                                     <div class="plugin_button">
-                                        <button type="button" class="btn btn-yellow" onclick="location.href='<?php echo $plugin->get_permalink(); ?>'" >
+                                        <button type="button" class="btn btn-yellow" onclick="location.href='<?php echo $plugin->get_permalink(); ?>'"
+                                                style="	background-color: <?php echo $color_accent; ?> !important;">
+
                                             View details
                                         </button>
                                     </div>
@@ -98,73 +120,9 @@ get_header();
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-sm-12 col-md-6 col-lg-4 plugin_wrap ">
-                            <?php if($coming_soon): ?>
-                                <div class="coming_soon_status">
-                                    Coming soon!
-                                </div>
-                            <?php endif; ?>
-
-                            <div class="plugin">
-                                <div class="container d-flex flex-column plugin_content">
-                                    <div class="plugin_logo">
-                                        <img src="<?php echo get_field('plugin_icon', $plugin->get_id())['url']; ?>"/>
-                                    </div>
-
-                                    <div class="plugin_title">
-                                        <h2 class="mb-4" ><strong><?php echo $plugin->get_title(); ?></strong></h2>
-                                        <p>  <?php echo $plugin->get_short_description(); ?> </p>
-                                    </div>
-
-                                    <div class="plugin_button">
-                                        <button type="button" class="btn btn-yellow" onclick="location.href='<?php echo $plugin->get_permalink(); ?>'" >
-                                            View details
-                                        </button>
-                                    </div>
-
-                                    <div class="plugin_illustration" style="background:url(<?php echo get_field('plugin_illustration', $plugin->get_id())['url']; ?>)">
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12 col-md-6 col-lg-4 plugin_wrap ">
-                            <?php if($coming_soon): ?>
-                                <div class="coming_soon_status">
-                                    Coming soon!
-                                </div>
-                            <?php endif; ?>
-
-                            <div class="plugin">
-                                <div class="container d-flex flex-column plugin_content">
-                                    <div class="plugin_logo">
-                                        <img src="<?php echo get_field('plugin_icon', $plugin->get_id())['url']; ?>"/>
-                                    </div>
-
-                                    <div class="plugin_title">
-                                        <h2 class="mb-4" ><strong><?php echo $plugin->get_title(); ?></strong></h2>
-                                        <p>  <?php echo $plugin->get_short_description(); ?> </p>
-                                    </div>
-
-                                    <div class="plugin_button">
-                                        <button type="button" class="btn btn-yellow" onclick="location.href='<?php echo $plugin->get_permalink(); ?>'" >
-                                            View details
-                                        </button>
-                                    </div>
-
-                                    <div class="plugin_illustration" style="background:url(<?php echo get_field('plugin_illustration', $plugin->get_id())['url']; ?>)">
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </div>
-
 
                     <?php endforeach; ?>
+
 
                 </div>
 

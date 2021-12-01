@@ -188,7 +188,7 @@ endif;
 
 
 if ( ! function_exists ('carrassishop_render_journal_highlight')) {
-    function carrassishop_render_journal_highlight($entry, $single_col = false) { ?>
+    function carrassishop_render_journal_highlight($entry,  $color_primary, $color_secondary, $color_accent, $single_col = false) { ?>
                                 <article class="<?php echo $single_col ? "col-12" : "col-sm-12 col-md-6"; ?> ">
                                     <div class="journal_wrap">
                                         <span class="featured_tag">
@@ -203,12 +203,23 @@ if ( ! function_exists ('carrassishop_render_journal_highlight')) {
                                         </span>
                                             </div>
                                         </div>
-                                        <div class="col-12 h-50 article_bot">
+
+
+
+
+
+                                        <div class="col-12 h-50 article_bot" style="
+                                        background: rgb(29,25,31);
+                                        background: -moz-linear-gradient(0deg, <?php echo $color_primary; ?> 0%, <?php echo $color_secondary; ?> 60%);
+                                        background: -webkit-linear-gradient(
+                                        0deg, <?php echo $color_primary; ?> 0%,  <?php echo $color_secondary; ?> 60%);
+                                        background: linear-gradient(
+                                        0deg, <?php echo $color_primary; ?> 0%,  <?php echo $color_secondary; ?> 60%);">
                                             <div class="article_excerpt">
                                                 <?php echo get_the_excerpt($entry->ID); ?>
                                             </div>
                                             <div class="article_readon">
-                                                <a href="<?php echo get_permalink($entry->ID); ?>">
+                                                <a style="color: <?php echo $color_accent; ?>" href="<?php echo get_permalink($entry->ID); ?>">
                                                     Read on
                                                 </a>
                                             </div>
@@ -264,7 +275,7 @@ if( ! function_exists('carrassishop_comment_callback')) {
 }
 
 if( ! function_exists( 'carrassishop_render_similar_posts')) {
-    function carrassishop_render_similar_posts($headline = "Related posts") {
+    function carrassishop_render_similar_posts($headline = "Related posts", $color_primary, $color_secondary, $color_accent) {
         $similar_posts = get_posts(array('tags' => get_the_tags(), 'category' => 'Journal', 'exclude' => get_the_ID()));
         $the_posts = array_slice($similar_posts, -3);
 
@@ -278,7 +289,7 @@ if( ! function_exists( 'carrassishop_render_similar_posts')) {
                         </h2>
                     </div>
                     <?php foreach($the_posts as $post) {
-                        carrassishop_render_journal_highlight($post);
+                        carrassishop_render_journal_highlight($post, $color_primary, $color_secondary, $color_accent);
                     } ?>
                 </div>
             </div>

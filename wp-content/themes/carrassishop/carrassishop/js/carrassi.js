@@ -193,7 +193,32 @@ document.addEventListener('DOMContentLoaded', function(e){
 
     }
 
+    var alternate_text_container = jQuery(".text_alternating");
+    if(alternate_text_container.length > 0) {
+        let wp = "Wordpress website";
+        let ap = "Android application";
 
+        function alternate_text() {
+            let current_text = alternate_text_container.text();
+
+
+
+            if(current_text === wp) {
+                alternate_text_container.fadeOut("slow", function() {
+                    alternate_text_container.text(ap);
+                    alternate_text_container.fadeIn("slow");
+                });
+            }
+            else {
+                alternate_text_container.fadeOut("slow", function() {
+                    alternate_text_container.text(wp);
+                    alternate_text_container.fadeIn("slow");
+                });
+            }
+        }
+
+        setInterval(alternate_text, 2000);
+    }
 
 
 

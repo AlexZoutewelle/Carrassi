@@ -188,8 +188,8 @@ endif;
 
 
 if ( ! function_exists ('carrassishop_render_journal_highlight')) {
-    function carrassishop_render_journal_highlight($entry,  $color_primary, $color_secondary, $color_accent, $single_col = false) { ?>
-                                <article class="<?php echo $single_col ? "col-12" : "col-sm-12 col-md-6"; ?> ">
+    function carrassishop_render_journal_highlight($entry,  $color_primary = "#1D191FFF", $color_secondary="#373C3FFF", $color_accent = "#dd9a00", $single_col = false) { ?>
+                                <article class="<?php echo $single_col ? "col-12" : "col-sm-12 col-md-6"; ?> mt-1">
                                     <div class="journal_wrap">
                                         <span class="featured_tag">
                                         <?php echo esc_html(get_field('featured_tag', $entry->ID)); ?>
@@ -275,19 +275,20 @@ if( ! function_exists('carrassishop_comment_callback')) {
 }
 
 if( ! function_exists( 'carrassishop_render_similar_posts')) {
-    function carrassishop_render_similar_posts($headline = "Related posts", $color_primary, $color_secondary, $color_accent) {
+    function carrassishop_render_similar_posts($headline = "Related posts", $color_primary = "#1D191FFF", $color_secondary="#373C3FFF", $color_accent = "#dd9a00") {
         $similar_posts = get_posts(array('tags' => get_the_tags(), 'category' => 'Journal', 'exclude' => get_the_ID()));
         $the_posts = array_slice($similar_posts, -3);
 
         ?>
            <section class="related_posts" id="related_posts">
             <div class="container">
+                <div class="col-12 text-center mt-5 p-3 section_title">
+                    <h1>
+                        <?php _e($headline, 'carrassishop'); ?>
+                    </h1>
+                </div>
+
                 <div class="row">
-                    <div class="col-12 my-5">
-                        <h2>
-                            <?php _e($headline, 'carrassishop'); ?>
-                        </h2>
-                    </div>
                     <?php foreach($the_posts as $post) {
                         carrassishop_render_journal_highlight($post, $color_primary, $color_secondary, $color_accent);
                     } ?>

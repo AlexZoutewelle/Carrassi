@@ -19,7 +19,17 @@ get_header();
     </aside>
 
 	<main id="primary" class="site-main">
+        <div class="sp_msg">
+            <div class="container">
+                <div class="row py-2">
+                    <span>
+                        <?php _e("Only", "carrassi"); ?> <strong>1 </strong><?php _e("Freelance spot left for a Wordpress plugin.", "mailcat"); ?>
+                         <a href="<?php echo get_home_url(); ?>/#contact">Contact us</a>
 
+                    </span>
+                </div>
+            </div>
+        </div>
         <section class="attract">
             <div class="container" style="position:relative;">
                 <div class="row">
@@ -75,7 +85,7 @@ get_header();
 
                             $test = 1;
                         ?>
-                        <div class="col-sm-12 col-md-6 col-lg-5 plugin_wrap ">
+                        <div class="col-sm-12 col-md-6 col-lg-6 plugin_wrap ">
                             <?php if($coming_soon): ?>
                                 <div class="coming_soon_status">
                                     Coming soon!
@@ -122,13 +132,37 @@ get_header();
                         </div>
 
                     <?php endforeach; ?>
-
-
                 </div>
 
             </div>
 
         </section>
+
+
+        <section class="about" id="twitterbanner" style="width: 1500px; height: 500px; padding: 0 ">
+            <div style="position: relative;padding: 0; height: 100%;">
+                <div style="display:flex; flex-direction:row">
+                    <div style="flex:2; display:flex; flex-direction: column">
+                        <div style="flex:1">
+                            <img style="margin-top: 74px; height: 190px; filter: drop-shadow(2px 4px 6px black);" src="http://carrassi/wp-content/uploads/2021/10/logo_white.svg">
+                        </div>
+                        <div style="background-color: #ffffff0d; flex: 1.2; font-size: 2.3rem; font-family: 'Mulish', sans-serif !important; margin: 17px 0px;">
+                            Android & WordPress development
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="pfp" style="     width: 430px; height: 172px; background-color: #ff00005c; position: absolute; bottom: 0px; left: 0px;">
+
+            </div>
+        </section>
+
+        <section class="profile_pic">
+            <img class="profile_pic_img" style="filter: drop-shadow(-26px 13px 10px black);" src="http://carrassi/wp-content/uploads/2021/12/wOezUV1n_400x400-removebg-preview.png">
+        </section>
+
 
         <section class="about" id="about">
             <div class="container">
@@ -202,6 +236,10 @@ get_header();
                     <h1>
                         Contact
                     </h1>
+                    <div class="contact_text">
+                        Interested in developing a Wordpress plugin or Android app? Or do you have a different enquiry?
+                    </div>
+
                 </div>
 
                 <form>

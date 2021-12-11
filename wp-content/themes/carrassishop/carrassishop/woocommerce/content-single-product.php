@@ -308,7 +308,7 @@ do_action( 'woocommerce_before_single_product' );
         <section>Examples</section>
 
         <section id="reviews" class="pb-5"
-        style="background-color: <?php echo $color_secondary; ?>">
+        style="background-color: <?php echo $color_primary; ?>">
             <div class="container">
                 <div class="row">
                     <h1 class="py-5">Reviews </h1>
@@ -354,6 +354,7 @@ do_action( 'woocommerce_before_single_product' );
             </div>
 
         </section>
+
 
         <?php carrassishop_render_similar_posts("Related blog posts", $color_primary, $color_secondary, $color_accent); ?>
 

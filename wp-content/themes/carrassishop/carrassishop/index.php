@@ -139,16 +139,24 @@ get_header();
         </section>
 
 
-        <section class="about" id="twitterbanner" style="width: 1500px; height: 500px; padding: 0 ">
+        <section class="about" id="twitterbanner" style="width: 1500px; height: 500px; padding: 0; border: 1px solid white;
+    box-shadow: 10px -5px 44px 10px black;  ">
             <div style="position: relative;padding: 0; height: 100%;">
                 <div style="display:flex; flex-direction:row">
                     <div style="flex:2; display:flex; flex-direction: column">
                         <div style="flex:1">
                             <img style="margin-top: 74px; height: 190px; filter: drop-shadow(2px 4px 6px black);" src="http://carrassi/wp-content/uploads/2021/10/logo_white.svg">
                         </div>
-                        <div style="background-color: #ffffff0d; flex: 1.2; font-size: 2.3rem; font-family: 'Mulish', sans-serif !important; margin: 17px 0px;">
-                            Android & WordPress development
+                        <div class="subtext">
+                            Building web apps in public
                         </div>
+
+                        <div class="twitterbanner_follow">
+                            <img class="girl" src="http://carrassi/wp-content/uploads/2021/10/supporticon.svg"/>
+                            <p>Let's build together! </p>
+                            <img class="downarrow" src="http://carrassi/wp-content/uploads/2021/12/downarrow.svg"/>
+                        </div>
+
                     </div>
                 </div>
 
@@ -157,6 +165,10 @@ get_header();
             <div class="pfp" style="     width: 430px; height: 172px; background-color: #ff00005c; position: absolute; bottom: 0px; left: 0px;">
 
             </div>
+        </section>
+
+        <section class="about" id='twitterpost' style="width: 1200px; height: 675px; padding: 0; border: 1px solid white;
+    box-shadow: 10px -5px 44px 10px black;  ">
         </section>
 
         <section class="profile_pic">

@@ -217,14 +217,14 @@ document.addEventListener('DOMContentLoaded', function(e){
             }
         }
 
-        setInterval(alternate_text, 2000);
+        // setInterval(alternate_text, 2000);
     }
 
 
 
     jQuery('#form_add_to_cart').submit(function(e){
         e.preventDefault();
-        jQuery(this).find(".spinner").css("display", "inline-block");
+        jQuery(this).find(". ,spinner").css("display", "inline-block");
         jQuery(this).find(".fa-shopping-cart").css("display", "none");
         let form_data = {};
         jQuery('#form_add_to_cart').serializeArray().map(function(item) {
@@ -349,4 +349,8 @@ document.addEventListener('DOMContentLoaded', function(e){
         jQuery(".navbar .dropdown").on('mouseleave', cart_button_mouseleave);
     }
 });
+
+fetch('https://api.github.com/users/alexcarrassi').then( (result) => {
+    console.log(result)
+})
 

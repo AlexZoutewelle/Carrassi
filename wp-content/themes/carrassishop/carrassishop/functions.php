@@ -200,6 +200,7 @@ function enqueue_admin_scripts() {
  */
 function enqueue_general_scripts() {
 
+    $test = 1;
     wp_enqueue_style( 'bootstrap-style', get_template_directory_uri() . '/bootstrap/css/bootstrap.min.css' );
     wp_enqueue_script( 'bootstrap-js' , get_template_directory_uri() . '/bootstrap/js/bootstrap.bundle.min.js', array('jquery') );
 
@@ -507,6 +508,7 @@ function checkout_page_cart() {
 /** Enqueue blog post scripts **/
 add_action("wp_enqueue_scripts", "enqueue_blog_post_scripts");
 function enqueue_blog_post_scripts() {
+
     if(get_post_type() == "post") {
         $post = get_post();
         $js = get_field("blog_js_enq", get_post()->ID);

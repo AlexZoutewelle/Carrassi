@@ -345,8 +345,9 @@ font-weight: bold;
 	transition:opacity 0.1s;
 	opacity:0.8;
 	text-align: left;
-	/* height: 800px; */
+	height: 800px;
 	/* max-height: 800px; */
+	margin: 2px;
 }
 
 .product_highlight .plugin:hover {
@@ -414,7 +415,10 @@ font-weight: bold;
 	color:#D9D9D9;
 	/* height:82vh; */
 	height: 800px;
-	padding: 15px 15px 272px 15px;
+	padding: 15px 15px 266px 15px;
+	border-radius: 20px;
+	border: 1px inset #0000008f;
+	margin: 0px;
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1d191f",endColorstr="#373c3f",GradientType=1);
 }
 
@@ -426,6 +430,7 @@ font-weight: bold;
 	top: 0;
 	right: 0;
 	bottom: 0;
+	border-radius: 20px;
 	background-image: url(http://carrassi/wp-content/uploads/2021/10/gplay.png);
 	background-repeat: repeat;
 	-webkit-mask-image: linear-gradient( 180deg, rgb(0 0 0) 0%, rgb(0 0 0 / 9%) 23%);
@@ -445,6 +450,7 @@ font-weight: bold;
 	/*justify-content: center;*/
 	/*align-items: center;*/
 	/*text-align:center;*/
+	/* height: 162px; */
 	z-index:5;
 }
 
@@ -616,7 +622,7 @@ section.about:before {
 	flex-direction: column;
 	justify-content: space-between;
 	padding: 21px 3vh;
-	box-shadow: inset 0px 5px 10px #070607d9;
+	box-shadow: inset 0px -13px 50px #070607d9;
 	background: rgb(29,25,31);
 	background: -moz-linear-gradient(0deg, rgba(29,25,31,1) 0%, rgba(55,60,63,1) 60%);
 	background: -webkit-linear-gradient(
@@ -916,7 +922,7 @@ p.form_submit {
 
 
 .plugin_short_description {
-	min-height: 200px;
+	/* min-height: 200px; */
 }
 
 .plugin_subtitle {
@@ -926,7 +932,7 @@ p.form_submit {
 
 
 .plugin_main article {
-	/* margin-top:2px; */
+	margin-top:2px;
 }
 
 #product_summary {

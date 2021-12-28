@@ -216,7 +216,7 @@ do_action( 'woocommerce_before_single_product' );
                         <?php if( $product_cat == "android") : ?>
 
                             <div >
-                                <a href='http://play.google.com/store/?pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img class="google_play_button" alt='Get it on Google Play' src='http://carrassi/wp-content/uploads/2021/11/google-play-badge-1.png'/></a>
+                                <a href='https://play.google.com/store/apps/details?id=com.carrassi.guitardecoder'><img class="google_play_button" alt='Get it on Google Play' src='http://carrassi/wp-content/uploads/2021/11/google-play-badge-1.png'/></a>
                             </div>
                         <?php else: ?>
                             <form id="form_add_to_cart" class="cart" action="<?php echo esc_url( apply_filters( 'woocommerce_add_to_cart_form_action', $product->get_permalink() ) ); ?>" method="post" enctype='multipart/form-data'>

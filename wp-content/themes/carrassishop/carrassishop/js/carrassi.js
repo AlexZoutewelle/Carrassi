@@ -352,22 +352,30 @@ document.addEventListener('DOMContentLoaded', function(e){
 
 
 
-    /** Same height for plugin titles **/
+    /** Same height for text element on plugin titles
+     *
+     * Only do this if necessary (ie, min-width = 767px  ie, elements are next to eachother)
+     * **/
+    function equalize_plugin_title_height(selector) {
+        var x = window.matchMedia("(min-width: 767px)")
+        if(x.matches) {
+            let max_height = 0;
+            document.querySelectorAll(selector).forEach((element) => {
+                let height = parseFloat(window.getComputedStyle(element).height);
+                if(height > max_height) {
+                    max_height = height;
+                }
+            })
 
-    function equalize_plugin_title_height() {
-        let max_height = 0;
-        document.querySelectorAll(".plugin_title").forEach((title) => {
-            let height = parseFloat(window.getComputedStyle(title).height);
-            if(height > max_height) {
-                max_height = height;
-            }
-        })
-
-        document.querySelectorAll(".plugin_title h2").forEach((title) => {
-            title.style.height = max_height + "px";
-        })
+            document.querySelectorAll(selector).forEach((element) => {
+                element.style.height = max_height + "px";
+            })
+        }
     }
-    equalize_plugin_title_height();
+    equalize_plugin_title_height(".plugin_title h2");
+    equalize_plugin_title_height(".plugin_subtitle h6");
+    equalize_plugin_title_height(".plugin_short_description");
+
 });
 
 

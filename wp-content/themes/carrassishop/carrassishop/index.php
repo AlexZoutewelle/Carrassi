@@ -132,17 +132,10 @@ get_header();
                         </div>
 
                     <?php endforeach; ?>
-                    <div class="col-sm-12 col-md-6 col-lg-4 plugin_wrap ">
-                        <?php if($coming_soon): ?>
-                            <div class="coming_soon_status">
-                                Coming soon!
-                            </div>
-                        <?php endif; ?>
+                    <div class="d-none d-lg-block col-sm-12 col-md-6 col-lg-4 plugin_wrap ">
+                        <div class="plugin"
+                             style="background-color: #1e1a2094; opacity: 1;">
 
-                        <div class="plugin">
-                            <div class="container d-flex flex-column plugin_content"
-                                 style=" background: <?php echo $color_secondary; ?>;">
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -152,38 +145,7 @@ get_header();
         </section>
 
 
-        <section class="about" id="twitterbanner" style="width: 1500px; height: 500px; padding: 0; border: 1px solid white;
-    box-shadow: 10px -5px 44px 10px black; margin: 50px 0px 212px 0px;  ">
-            <div style="position: relative;padding: 0; height: 100%;">
-                <div style="display:flex; flex-direction:row">
-                    <div style="flex:2; display:flex; flex-direction: column">
-                        <div style="flex:1">
-                            <img style="margin-top: 74px; height: 190px; filter: drop-shadow(2px 4px 6px black);" src="http://carrassi/wp-content/uploads/2021/10/logo_white.svg">
-                        </div>
-                        <div class="subtext">
-                            Building web apps in public
-                        </div>
 
-                        <div class="twitterbanner_follow">
-                            <img class="girl" src="http://carrassi/wp-content/uploads/2021/10/supporticon.svg"/>
-                            <p>Let's build together! </p>
-                            <img class="downarrow" src="http://carrassi/wp-content/uploads/2021/12/downarrow.svg"/>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="pfp">
-                    <div class="pfp_inner">
-                        <img class="profile_pic_img" style="filter: grayscale(1) brightness(1.3) drop-shadow(-26px 13px 10px black); " src="http://carrassi/wp-content/uploads/2021/12/wOezUV1n_400x400-removebg-preview.png">
-                    </div>
-                </div>
-            </div>
-<!--            <div class="pfp" style="     width: 430px; height: 172px; background-color: #ff00005c; position: absolute; bottom: 0px; left: 0px;">-->
-
-            </div>
-
-        </section>
 
 
 

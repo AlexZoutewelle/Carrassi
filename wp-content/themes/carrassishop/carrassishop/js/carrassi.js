@@ -348,9 +348,26 @@ document.addEventListener('DOMContentLoaded', function(e){
 
         jQuery(".navbar .dropdown").on('mouseleave', cart_button_mouseleave);
     }
+
+
+
+
+    /** Same height for plugin titles **/
+
+    function equalize_plugin_title_height() {
+        let max_height = 0;
+        document.querySelectorAll(".plugin_title").forEach((title) => {
+            let height = parseFloat(window.getComputedStyle(title).height);
+            if(height > max_height) {
+                max_height = height;
+            }
+        })
+
+        document.querySelectorAll(".plugin_title h2").forEach((title) => {
+            title.style.height = max_height + "px";
+        })
+    }
+    equalize_plugin_title_height();
 });
 
-fetch('https://api.github.com/users/alexcarrassi').then( (result) => {
-    console.log(result)
-})
 

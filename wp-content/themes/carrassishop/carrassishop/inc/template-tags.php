@@ -209,12 +209,13 @@ if ( ! function_exists ('carrassishop_render_journal_highlight')) {
 
 
                                         <div class="col-12 h-50 article_bot" style="
-                                        background: rgb(29,25,31);
-                                        background: -moz-linear-gradient(0deg, <?php echo $color_primary; ?> 0%, <?php echo $color_secondary; ?> 60%);
-                                        background: -webkit-linear-gradient(
-                                        0deg, <?php echo $color_primary; ?> 0%,  <?php echo $color_secondary; ?> 60%);
-                                        background: linear-gradient(
-                                        0deg, <?php echo $color_primary; ?> 0%,  <?php echo $color_secondary; ?> 60%);">
+                                        background: <?php echo $color_primary; ?>;
+                                        /*background: -moz-linear-gradient(0deg, */<?php //echo $color_primary; ?>/* 0%, */<?php //echo $color_secondary; ?>/* 60%);*/
+                                        /*background: -webkit-linear-gradient(*/
+                                        /*0deg, */<?php //echo $color_primary; ?>/* 0%,  */<?php //echo $color_secondary; ?>/* 60%);*/
+                                        /*background: linear-gradient(*/
+                                        /*0deg, */<?php //echo $color_primary; ?>/* 0%,  */<?php //echo $color_secondary; ?>/* 60%);*/
+                                            ">
                                             <div class="article_excerpt">
                                                 <?php echo get_the_excerpt($entry->ID); ?>
                                             </div>

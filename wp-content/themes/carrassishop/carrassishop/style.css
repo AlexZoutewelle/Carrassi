@@ -507,8 +507,9 @@ font-weight: bold;
 section.about {
 	position:relative;
 	text-align:center;
-	margin: 15px 0px 40px 0px;
+	margin: 15px 0px 60px 0px;
 	padding:15px;
+	box-shadow: 0px 10px 38px 0px #2f3236;
 	color: #D9D9D9;
 	background: rgb(29,25,31);
 	background: -moz-linear-gradient(180deg, rgba(29,25,31,1) 0%, rgba(55,60,63,1) 100%);
@@ -1628,6 +1629,35 @@ article.col-12.col-sm-6.review.py-3 {}
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #twitterbanner {
 	background: radial-gradient(at 50% , rgba(53,58,61,1) 0%, rgba(29,25,31,1) 80%);
 	font-size: 3.3rem;
@@ -1756,4 +1786,104 @@ background-image: url(http://carrassi/wp-content/uploads/2021/12/cubesvec.svg);
 	font-family: 'Mulish', sans-serif !important;
 	padding: 16px;
 	margin: 17px 0px;
+}
+
+
+
+
+section.about_page_intro {
+	position: relative;
+	margin: 2px 0px 60px 0px;
+	box-shadow: 0px 10px 38px 0px #2f3236;
+	color: #ffffff;
+	background: linear-gradient(180deg, rgb(54 59 62) 0%, rgb(29 25 31) 30%, rgb(29 25 31) 64%, rgb(219 153 1) 320%);
+}
+
+.about_page_intro img {
+	border-radius: 15px 15px 0px 0px;
+	margin-left: 50px;
+	filter: saturate(0) brightness(1.2) opacity(1) drop-shadow(-6px 4px 10px rgb(29 25 31));
+	opacity: 0;
+
+	animation: slideInFromLeft 1.2s ease-out 0.4s 1 normal forwards;
+}
+
+section.about_page_intro:before {
+	content: ' ';
+	position: absolute;
+	left: 0;
+	top: 0;
+	right:0;
+	bottom:0;
+	background-image: url(http://carrassi/wp-content/uploads/2021/12/1024x576a.jpg);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: 100% 100%;
+	pointer-events: none;
+	filter: opacity(0.2) grayscale(1);
+	opacity: 0;
+	animation: opacity_0to1 0.6s ease-out 0s 1 normal forwards;
+}
+
+
+img.bg {
+	float: left;
+	position: absolute;
+	left: 14px;
+	filter: sepia(1) opacity(0.2) brightness(1.2) blur(3px);
+}
+
+
+
+.about_page_intro h1 {
+	font-size: 85px;
+	color: #dc9900;
+	opacity:0;
+	animation: opacity_0to1 1.3s ease-out 0.9s 1 normal forwards;
+}
+
+.about_page_intro h3 {
+	opacity:0;
+	/* font-size: 40px; */
+	animation: opacity_0to1 1.3s ease-out 1.7s 1 normal forwards;
+}
+
+.about_page_intro p {
+	opacity:0;
+	animation: opacity_0to1 1.3s ease-out 2.5s 1 normal forwards;
+}
+.about_page_intro label {
+	margin-left:5px;
+}
+
+.about_page_intro span {
+	color: #dc9900;
+}
+
+
+@keyframes slideInFromLeft {
+	0% {
+		opacity: 0;
+		transform: translateX(-100%);
+	}
+	40% {
+		transform: translateX(0);
+	}
+
+	80% {
+		opacity:1;
+	}
+	100% {
+		opacity:1;
+	}
+}
+
+@keyframes opacity_0to1 {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
 }

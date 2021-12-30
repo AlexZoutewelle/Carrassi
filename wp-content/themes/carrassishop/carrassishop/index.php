@@ -23,7 +23,7 @@ get_header();
             <div class="container">
                 <div class="row py-2">
                     <span>
-                        <?php _e("Only", "carrassi"); ?> <strong>1 </strong><?php _e("Freelance spot left for a Wordpress plugin.", "mailcat"); ?>
+                        <?php _e("Only", "carrassi"); ?> <strong>1 </strong><?php _e("Spot left for a custom-made Wordpress plugin.", "mailcat"); ?>
                          <a href="<?php echo get_home_url(); ?>/#contact">Contact us</a>
 
                     </span>

@@ -44,7 +44,7 @@
                                 <a class="nav-link" href="<?php echo get_home_url(); ?>/#journal">Journal</a>
                             </li>
                             <li class="nav-item mt-1">
-                                <a class="nav-link" href="<?php echo get_home_url(); ?>/#about">About</a>
+                                <a class="nav-link" href="<?php echo get_page_link(168); ?>">About</a>
                             </li>
                             <li class="nav-item mt-1">
                                 <a class="nav-link" href="<?php echo get_home_url(); ?>/#contact">Contact</a>

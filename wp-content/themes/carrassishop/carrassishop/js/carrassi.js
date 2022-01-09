@@ -376,6 +376,34 @@ document.addEventListener('DOMContentLoaded', function(e){
     equalize_plugin_title_height(".plugin_subtitle h6");
     equalize_plugin_title_height(".plugin_short_description");
 
+
+    if(document.querySelector(".splide")) {
+        new Splide( '.splide', {
+            type       : 'loop',
+            perPage    : 1,
+            gap: '1em',
+            centerMode: true,
+
+            breakpoints: {
+                640: {
+                    height: '6rem',
+                },
+            },
+        } ).mount();
+    }
+
+    // let ff = document.querySelector(".fullscreen-first");
+    //
+    // if(ff !== null ) {
+    //     let header = document.querySelector(".page_header")
+    //     console.log(
+    //         window.getComputedStyle(header).height
+    //     );
+    //
+    //
+    //     ff.style.height = window.innerHeight  - parseInt(window.getComputedStyle(header).height) + "px"
+    // }
 });
+
 
 
